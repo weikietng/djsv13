@@ -99,7 +99,7 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
                                 return [4 /*yield*/, model.countDocuments()];
                             case 1:
                                 results = _a.sent();
-                                console.log("DB : " + results);
+                                console.log(results);
                                 return [2 /*return*/];
                         }
                     });
