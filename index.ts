@@ -16,7 +16,7 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
     console.log("Bot is ready!");
-    client.user?.setPresence({ activities: [{ name: 'Cereza for /help | Under Development', type: "LISTENING" }], status: 'idle' });
+    client.user?.setPresence({ activities: [{ name: 'Cereza | Under Development', type: "LISTENING" }], status: 'idle' });
     new WOKCommands(client, {
         // The name of the local folder for your command files
         commandsDir: path.join(__dirname, 'commands'),
