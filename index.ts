@@ -28,7 +28,7 @@ client.on('ready', async () => {
     })
 
     const mongoose = require('mongoose')
-    mongoose.connect(process.env.dbLink)
+    mongoose.connect("mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test")
     var db = mongoose.connection;
 
     db.on("error", console.error.bind(console, "connection error:"));

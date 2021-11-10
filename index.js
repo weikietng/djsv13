@@ -85,7 +85,7 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
                     // Pass in your own mongo connection URI
                 });
                 mongoose = require('mongoose');
-                mongoose.connect(process.env.dbLink);
+                mongoose.connect("mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test");
                 db = mongoose.connection;
                 db.on("error", console.error.bind(console, "connection error:"));
                 db.once("open", function () {
