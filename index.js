@@ -34,6 +34,6 @@ var client = new discord_js_1.default.Client({
 client.on('ready', function () {
     var _a;
     console.log("Bot is ready!");
-    (_a = client.user) === null || _a === void 0 ? void 0 : _a.setPresence({ activities: [{ name: 'for Cereza for help | Under Development', type: "LISTENING" }], status: 'idle' });
+    (_a = client.user) === null || _a === void 0 ? void 0 : _a.setPresence({ activities: [{ name: 'Cereza for /help | Under Development', type: "LISTENING" }], status: 'idle' });
 });
 client.login(process.env["TOKEN"]);
