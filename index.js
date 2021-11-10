@@ -98,7 +98,7 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                model = connection.models['wokcommands-languages'];
+                                model = connection.models['Account'];
                                 return [4 /*yield*/, model.countDocuments()];
                             case 1:
                                 results = _a.sent();

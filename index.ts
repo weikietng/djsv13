@@ -35,7 +35,7 @@ client.on('ready', async() => {
     })
     
     wok.on('databaseConnected', async (connection, state) => {
-      const model = connection.models['wokcommands-languages']
+      const model = connection.models['Account']
     
       const results = await model.countDocuments()
       console.log(results)
