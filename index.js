@@ -24,16 +24,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = __importStar(require("discord.js"));
 var dotenv_1 = __importDefault(require("dotenv"));
+var wokcommands_1 = __importDefault(require("wokcommands"));
+var path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 var client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,
-        discord_js_1.Intents.FLAGS.GUILD_MESSAGES
-    ]
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+    ],
 });
 client.on('ready', function () {
     var _a;
     console.log("Bot is ready!");
     (_a = client.user) === null || _a === void 0 ? void 0 : _a.setPresence({ activities: [{ name: 'Cereza for /help | Under Development', type: "LISTENING" }], status: 'idle' });
+    new wokcommands_1.default(client, {
+        // The name of the local folder for your command files
+        commandsDir: path_1.default.join(__dirname, 'commands'),
+        // Allow importing of .ts files if you are using ts-node
+    });
 });
 client.login(process.env["TOKEN"]);
