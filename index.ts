@@ -14,7 +14,7 @@ intents:[
 
 client.on('ready',()=>{
     console.log("Bot is ready!");
-   client.user?.setPresence({ activities: [{ name: 'to Cereza | Under Development',type:"LISTENING" }], status: 'idle' });
+   client.user?.setPresence({ activities: [{ name: 'for Cereza for help | Under Development',type:"LISTENING" }], status: 'idle' });
 })
 
 
