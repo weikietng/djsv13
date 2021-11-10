@@ -31,7 +31,7 @@ client.on('ready', async() => {
       // Pass in the new dbOptions
       dbOptions,
       // Pass in your own mongo connection URI
-      mongoUri: process.env["dbLink"]
+      mongoUri: "mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test"
     })
     
     wok.on('databaseConnected', async (connection, state) => {

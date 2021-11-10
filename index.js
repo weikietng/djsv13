@@ -91,7 +91,7 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
                     // Pass in the new dbOptions
                     dbOptions: dbOptions,
                     // Pass in your own mongo connection URI
-                    mongoUri: process.env["dbLink"]
+                    mongoUri: "mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test"
                 });
                 wok.on('databaseConnected', function (connection, state) { return __awaiter(void 0, void 0, void 0, function () {
                     var model, results;
