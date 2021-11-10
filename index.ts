@@ -31,7 +31,7 @@ client.on('ready', async() => {
       // Pass in the new dbOptions
       dbOptions,
       // Pass in your own mongo connection URI
-      mongoUri: process.env.dbLink
+      mongoUri: process.env["dbLink"]
     })
     
     wok.on('databaseConnected', async (connection, state) => {
