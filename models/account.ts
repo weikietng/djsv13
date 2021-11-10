@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+let Schema = new mongoose.Schema({
 
-const schema = new mongoose.Schema({
-    RobloxUserID: { Type: String },
-    DiscordID: { Type: String },
-    Donator: { Type: Boolean }
-})
 
-export default mongoose.model("Account", schema)
+  RobloxUserID: String,
+  DiscordID: String,
+  Donator: Boolean
+
+});
+module.exports = mongoose.model("Account", Schema);
