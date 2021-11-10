@@ -5,8 +5,8 @@ const verification = require("../models/account");
 
 export default{
     category: 'Utility',
-    description: 'Replies with pong!',
-    slash: true,
+    description: 'Return with user profile',
+    
 
 
     callback:({message})=>{
