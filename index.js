@@ -80,10 +80,7 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
             case 0:
                 dbOptions = {
                     // These are the default values
-                    keepAlive: true,
-                    useNewUrlParser: true,
-                    useUnifiedTopology: true,
-                    useFindAndModify: false
+                    keepAlive: true
                 };
                 wok = new wokcommands_1.default(client, {
                     // The name of the local folder for your command files

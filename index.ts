@@ -20,10 +20,7 @@ const client = new DiscordJS.Client({
 client.on('ready', async() => {
     const dbOptions = {
       // These are the default values
-      keepAlive: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false
+      keepAlive: true
     }
     const wok = new WOKCommands(client, {
       // The name of the local folder for your command files
