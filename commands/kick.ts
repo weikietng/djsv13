@@ -32,6 +32,10 @@ export default {
         ephemeral: true,
       }
     }
+    const author = interaction.member as GuildMember
+    if( !author.roles.cache.has("861328403357892658")){
+        return 'No roles bitch'
+    }
 
     args.shift()
     const reason = args.join(' ')
