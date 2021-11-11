@@ -48,18 +48,14 @@ exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
     slash: "both",
-    options: [
-        {
-            name: 'target',
-            description: 'User',
-            required: false,
-            type: 'USER', // This argument is a string
-        },
-    ],
+    expectedArgs: '[target]',
+    minArgs: 0,
+    maxArgs: 1,
+    expectedArgsTypes: ['USER'],
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target, targetmember, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata;
+            var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, targetmember, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata;
             var _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
@@ -213,9 +209,8 @@ exports.default = {
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
                         target = interaction.options.getMember('target');
-                        targetmember = target.id;
                         if (!!target) return [3 /*break*/, 35];
-                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
+                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
                         data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 33];
@@ -287,7 +282,9 @@ exports.default = {
                         message.reply({ embeds: [embedNodata] });
                         _c.label = 34;
                     case 34: return [3 /*break*/, 46];
-                    case 35: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
+                    case 35:
+                        targetmember = target.id;
+                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
                     case 36:
                         data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 45];

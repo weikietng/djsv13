@@ -15,14 +15,11 @@ export default {
   description: "Return with the user's profile",
   slash: "both",
 
-  options: [
-    {
-      name: 'target', // Must be lower case
-      description: 'User',
-      required: false,
-      type: 'USER', // This argument is a string
-    },
-  ],
+  expectedArgs: '[target]',
+  minArgs: 0,
+  maxArgs: 1,
+  expectedArgsTypes:['USER'],
+
   callback: async ({ message, args, interaction }) => {
     
     if (message) {
@@ -185,9 +182,9 @@ export default {
     }
     if (interaction) {
       let target = interaction.options.getMember('target') as GuildMember;
-      const targetmember = target.id;
+      
       if(!target){
-        let data1 = await verifiation.findOne({ DiscordID: `${targetmember}` })
+        let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })
 
       if (data1) {
         let username = await noblox.getUsernameFromId(data1.RobloxUserID)
@@ -264,7 +261,8 @@ export default {
       }
 
       }else{
-        let data1 = await verifiation.findOne({ DiscordID: `${target.id}`})
+        const targetmember = target.id;
+        let data1 = await verifiation.findOne({ DiscordID: `${targetmember}`})
 
         if (data1) {
           let username = await noblox.getUsernameFromId(data1.RobloxUserID)
