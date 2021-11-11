@@ -56,7 +56,7 @@ exports.default = {
             type: 9
         }],
     callback: function (_a) {
-        var message = _a.message, interaction = _a.interaction;
+        var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
             var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, targetmember, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata;
             var _b;
@@ -65,6 +65,7 @@ exports.default = {
                     case 0:
                         if (!message) return [3 /*break*/, 23];
                         target = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first();
+                        console.log("Message Command");
                         if (!!target) return [3 /*break*/, 12];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + message.author.id })];
                     case 1:

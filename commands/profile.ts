@@ -24,10 +24,11 @@ export default {
 
   }],
 
-  callback: async ({ message, interaction }) => {
+  callback: async ({ message, args, interaction }) => {
     
     if (message) {
       const target = message.mentions.members?.first()
+      console.log("Message Command")
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${message.author.id}` })
 
