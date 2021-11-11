@@ -185,7 +185,7 @@ export default {
     }
     if (interaction) {
       let target = interaction.options.getMentionable('user') as GuildMember;
-      console.log(`Target: ${target.displayName}`)
+      
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })
 

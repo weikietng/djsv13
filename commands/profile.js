@@ -213,7 +213,6 @@ exports.default = {
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
                         target = interaction.options.getMentionable('user');
-                        console.log("Target: " + target.displayName);
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
