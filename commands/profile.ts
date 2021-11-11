@@ -15,10 +15,13 @@ export default {
   description: "Return with the user's profile",
   slash: "both",
 
-  expectedArgs: '[target]',
-  minArgs: 0,
-  maxArgs: 1,
-  expectedArgsTypes:['USER'],
+  options: [{
+    name: "target",
+    description: "Get the profile for the mentioned user",
+    required: false,
+    type: 6
+
+  }],
 
   callback: async ({ message, args, interaction }) => {
     
@@ -181,7 +184,7 @@ export default {
       
     }
     if (interaction) {
-      let target = interaction.options.getMember('target') as GuildMember;
+      let target = interaction.options.getMentionable('target') as GuildMember;
       
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })

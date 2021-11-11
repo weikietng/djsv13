@@ -48,10 +48,12 @@ exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
     slash: "both",
-    expectedArgs: '[target]',
-    minArgs: 0,
-    maxArgs: 1,
-    expectedArgsTypes: ['USER'],
+    options: [{
+            name: "target",
+            description: "Get the profile for the mentioned user",
+            required: false,
+            type: 6
+        }],
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
@@ -208,7 +210,7 @@ exports.default = {
                         _c.label = 23;
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
-                        target = interaction.options.getMember('target');
+                        target = interaction.options.getMentionable('target');
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
