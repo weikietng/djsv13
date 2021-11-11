@@ -88,7 +88,6 @@ exports.default = {
                                         if (!(data.status === "error")) return [3 /*break*/, 4];
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
-                                            .setCustomId('RoVerLink')
                                             .setURL('https://rover.link/login/')
                                             .setLabel('Verify account here')
                                             .setStyle('LINK'));
@@ -116,7 +115,6 @@ exports.default = {
                                         err_1 = _a.sent();
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
-                                            .setCustomId('RoVerLink')
                                             .setURL('https://rover.link/login/')
                                             .setLabel('Verify account here')
                                             .setStyle('LINK'));

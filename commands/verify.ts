@@ -46,7 +46,6 @@ export default {
                     const verifyRow = new MessageActionRow()
                         .addComponents(
                             new MessageButton()
-                                .setCustomId('RoVerLink')
                                 .setURL('https://rover.link/login/')
                                 .setLabel('Verify account here')
                                 .setStyle('LINK')
@@ -81,7 +80,7 @@ export default {
                 const verifyRow = new MessageActionRow()
                         .addComponents(
                             new MessageButton()
-                                .setCustomId('RoVerLink')
+
                                 .setURL('https://rover.link/login/')
                                 .setLabel('Verify account here')
                                 .setStyle('LINK')
