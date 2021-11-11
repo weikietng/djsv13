@@ -137,7 +137,9 @@ exports.default = {
                         message.reply({ embeds: [embedNodata] });
                         _c.label = 11;
                     case 11: return [3 /*break*/, 23];
-                    case 12: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
+                    case 12:
+                        if (!target) return [3 /*break*/, 23];
+                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 13:
                         data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 22];
