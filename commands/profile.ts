@@ -13,7 +13,7 @@ import { MessageEmbed } from "discord.js";
 export default {
   category: 'Utility',
   description: "Return with the user's profile",
-  slash: false,
+  slash: "both",
 
   expectedArgs: '<target>',
   minArgs: 0,
