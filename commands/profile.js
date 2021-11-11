@@ -48,9 +48,14 @@ exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
     slash: "both",
-    expectedArgs: '<target>',
-    minArgs: 0,
-    maxArgs: 1,
+    options: [
+        {
+            name: 'target',
+            description: 'User',
+            required: false,
+            type: 'USER', // This argument is a string
+        },
+    ],
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {

@@ -15,10 +15,14 @@ export default {
   description: "Return with the user's profile",
   slash: "both",
 
-  expectedArgs: '<target>',
-  minArgs: 0,
-  maxArgs: 1,
-
+  options: [
+    {
+      name: 'target', // Must be lower case
+      description: 'User',
+      required: false,
+      type: 'USER', // This argument is a string
+    },
+  ],
   callback: async ({ message, args, interaction }) => {
     
     if (message) {
