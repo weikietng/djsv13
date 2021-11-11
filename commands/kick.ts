@@ -66,8 +66,39 @@ export default {
         return noReasonEmbed
 
     }
+    if (Message){
+        let DMembed = new MessageEmbed()
+        .setTitle("**Cereza Moderation**")
+        .setDescription(`You have been kicked from Cereza for ${reason}. \n \n Moderator: ${message.member?.displayName}`)
+        .setFooter("Cereza Moderation")
+        .setColor("ORANGE")
+    
+    try{
+        target.send({embeds: [DMembed]})
 
-    let DMembed = new MessageEmbed()
+    }catch(error){
+        console.log(error)
+        interaction.channel?.send({embeds:[new MessageEmbed()
+            .setTitle("Error DM'ing user")
+            .setDescription("The user had their DM's set to private. \n However, I will proceed to kick them.")
+            .setFooter("Cereza Modetaion")
+            .setColor("YELLOW")
+        ]})
+
+    }
+
+
+    target.kick(reason)
+
+    let KickEmbed = new MessageEmbed()
+    .setTitle("**Kicked Succesfully**")
+    .setDescription(`${target.user.username} had been kicked. \n \n **Reason: ** ${reason} \n **Moderator:** ${message.member?.displayName}`)
+    .setFooter("Cereza Moderation")
+    .setColor("PURPLE")
+
+    return KickEmbed
+    }else{
+        let DMembed = new MessageEmbed()
         .setTitle("**Cereza Moderation**")
         .setDescription(`You have been kicked from Cereza for ${reason}. \n \n Moderator: ${interaction.user.username}`)
         .setFooter("Cereza Moderation")
@@ -97,5 +128,8 @@ export default {
     .setColor("PURPLE")
 
     return KickEmbed
+
+    }
+    
   },
 } as ICommand
