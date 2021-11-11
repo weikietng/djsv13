@@ -44,7 +44,6 @@ var axios_1 = __importDefault(require("axios"));
 exports.default = {
     category: 'Setup',
     description: 'Setup verification button',
-    permissions: ['ADMINISTRATOR'],
     slash: true,
     callback: function (_a) {
         var msgInt = _a.interaction, channel = _a.channel;

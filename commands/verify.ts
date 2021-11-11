@@ -5,7 +5,7 @@ import axios from 'axios'
 export default {
     category: 'Setup',
     description: 'Setup verification button',
-    permissions: ['ADMINISTRATOR'],
+
     slash: true,
 
 
