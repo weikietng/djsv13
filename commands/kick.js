@@ -26,7 +26,11 @@ exports.default = {
         }
         var author = interaction.member;
         if (!author.roles.cache.has("861328403357892658")) {
-            return 'No roles bitch';
+            return {
+                custom: true,
+                content: 'Trial',
+                ephemeral: true,
+            };
         }
         args.shift();
         var reason = args.join(' ');
