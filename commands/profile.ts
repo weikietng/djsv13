@@ -283,7 +283,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
   
-              interaction.reply({embeds: [embed1]})
+              interaction.channel?.send({embeds: [embed1]})
   
             }else{
               const embed2 = new MessageEmbed()
@@ -293,7 +293,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
               
-              interaction.reply({embeds: [embed2]})
+              interaction.channel?.send({embeds: [embed2]})
   
   
             }
@@ -311,7 +311,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
   
-              interaction.reply({embeds: [embed1]})
+              interaction.channel?.send({embeds: [embed1]})
   
             }else{
               const embed2 = new MessageEmbed()
@@ -321,7 +321,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
               
-              interaction.reply({embeds: [embed2]})
+              interaction.channel?.send({embeds:[embed2]})
   
   
             }
@@ -335,7 +335,7 @@ export default {
             .setFooter("Cereza Profile")
             .setColor("RED")
   
-            interaction.reply({embeds: [embedNodata]})
+            interaction.channel?.send({embeds: [embedNodata]})
         }
       }
     }
