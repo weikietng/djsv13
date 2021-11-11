@@ -47,7 +47,7 @@ var discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
-    slash: "both",
+    slash: false,
     options: [{
             name: "user",
             description: "Get the profile for the mentioned user",

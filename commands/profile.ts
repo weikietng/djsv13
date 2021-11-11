@@ -13,7 +13,7 @@ import { MessageEmbed } from "discord.js";
 export default {
   category: 'Utility',
   description: "Return with the user's profile",
-  slash: "both",
+  slash: false,
 
   options: [{
     name: "user",
@@ -185,7 +185,7 @@ export default {
     }
     if (interaction) {
       let target = interaction.options.getMentionable('user') as GuildMember;
-      
+
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })
 
