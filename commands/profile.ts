@@ -23,7 +23,7 @@ export default {
 
   }],
 
-  callback: async ({ message, args, interaction }) => {
+  callback: async ({ message, interaction }) => {
     
     if (message) {
       const target = message.mentions.members?.first()
