@@ -19,7 +19,7 @@ export default {
     name: "target",
     description: "Get the profile for the mentioned user",
     required: false,
-    type: 6
+    type: 9
 
   }],
 
@@ -184,7 +184,7 @@ export default {
       
     }
     if (interaction) {
-      let target = interaction.options.getMentionable('target') as GuildMember;
+      let target = interaction.options.getMember('target') as GuildMember;
       
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })

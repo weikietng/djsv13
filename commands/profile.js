@@ -52,7 +52,7 @@ exports.default = {
             name: "target",
             description: "Get the profile for the mentioned user",
             required: false,
-            type: 6
+            type: 9
         }],
     callback: function (_a) {
         var message = _a.message, interaction = _a.interaction;
@@ -210,7 +210,7 @@ exports.default = {
                         _c.label = 23;
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
-                        target = interaction.options.getMentionable('target');
+                        target = interaction.options.getMember('target');
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
