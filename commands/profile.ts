@@ -105,7 +105,7 @@ export default {
           message.reply({embeds: [embedNodata]})
       }
 
-      }else if(target) {
+      }else{
         let data1 = await verifiation.findOne({ DiscordID: `${target.id}` })
 
         if (data1) {
