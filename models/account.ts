@@ -8,4 +8,4 @@ let Schema = new mongoose.Schema({
   Donator: Boolean
 
 });
-module.exports = mongoose.model("Account", Schema);
+export default mongoose.model("Account", Schema)

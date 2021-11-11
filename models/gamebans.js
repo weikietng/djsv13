@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
 var Schema = new mongoose_1.default.Schema({
     RobloxUserID: String,
-    DiscordID: String,
-    Donator: Boolean
+    Moderator: String,
+    Reason: String
 });
-exports.default = mongoose_1.default.model("Account", Schema);
+exports.default = mongoose_1.default.model("GameBans", Schema);
