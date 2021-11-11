@@ -1,13 +1,13 @@
 
 
-import { GuildMember } from 'discord.js'
+import { GuildMember,Message,MessageEmbed } from 'discord.js'
 import { ICommand } from 'wokcommands'
 
 export default {
   category: 'Moderation',
   description: 'Kicks a user',
 
-  permissions: ['ADMINISTRATOR'],
+  requireRoles: true,
   
 
   slash: 'both',
@@ -21,35 +21,81 @@ export default {
     const target = message
       ? message.mentions.members?.first()
       : (interaction.options.getMember('user') as GuildMember)
+
+     
+
     if (!target) {
-      return 'Please tag someone to kick.'
+        let noTagEmbed = new MessageEmbed()
+        .setTitle("**No user provided**")
+        .setDescription("Please tag the user you are trying to kick.")
+        .setFooter("Cereza Moderation")
+        .setColor("RED")
+
+    
+  
+    return noTagEmbed
     }
 
+    
+
     if (!target.kickable) {
-      return {
-        custom: true,
-        content: 'Cannot kick that user.',
-        ephemeral: true,
-      }
+        let CannotKickEmbed = new MessageEmbed()
+            .setTitle("**Unable to kick**")
+            .setDescription("You can't kick this user.")
+            .setFooter("Cereza Moderation")
+            .setColor("RED")
+
+        
+      
+        return CannotKickEmbed
     }
-    const author = interaction.member as GuildMember
-    if( !author.roles.cache.has("861328403357892658")){
-        return{
-            custom: true,
-            content: 'Trial',
-            ephemeral: true,
-          }
-    }
+    
 
     args.shift()
     const reason = args.join(' ')
 
+    if (!reason){
+        let noReasonEmbed = new MessageEmbed()
+            .setTitle("**No reason provided**")
+            .setDescription("You can't kick this user without a valid reason.")
+            .setFooter("Cereza Moderation")
+            .setColor("RED")
+
+        
+      
+        return noReasonEmbed
+
+    }
+
+    let DMembed = new MessageEmbed()
+        .setTitle("**Cereza Moderation**")
+        .setDescription(`You have been kicked from Cereza for ${reason}. \n \n Moderator: ${interaction.user.username}`)
+        .setFooter("Cereza Moderation")
+        .setColor("ORANGE")
+    
+    try{
+        target.send({embeds: [DMembed]})
+
+    }catch(error){
+        console.log(error)
+        interaction.channel?.send({embeds:[new MessageEmbed()
+            .setTitle("Error DM'ing user")
+            .setDescription("The user had their DM's set to private. \n However, I will proceed to kick them.")
+            .setFooter("Cereza Modetaion")
+            .setColor("YELLOW")
+        ]})
+
+    }
+
+
     target.kick(reason)
 
-    return {
-      custom: true,
-      content: `You kicked <@${target.id}>`,
-      ephemeral: true,
-    }
+    let KickEmbed = new MessageEmbed()
+    .setTitle("**Kicked Succesfully**")
+    .setDescription(`${target.user.username} had been kicked. \n \n **Reason: ** ${reason} \n **Moderator:** ${interaction.user.username}`)
+    .setFooter("Cereza Moderation")
+    .setColor("PURPLE")
+
+    return KickEmbed
   },
 } as ICommand
