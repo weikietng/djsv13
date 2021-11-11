@@ -49,7 +49,7 @@ exports.default = {
     description: "Return with the user's profile",
     slash: "both",
     options: [{
-            name: "target",
+            name: "user",
             description: "Get the profile for the mentioned user",
             required: false,
             type: 9
@@ -210,7 +210,7 @@ exports.default = {
                         _c.label = 23;
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
-                        target = interaction.options.getMember('target');
+                        target = interaction.options.getMember('user');
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
