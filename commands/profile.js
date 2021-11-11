@@ -48,7 +48,7 @@ var devMode = true;
 exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
-    slash: true,
+    slash: "both",
     options: [{
             name: "user",
             description: "Get the profile for the mentioned user",
