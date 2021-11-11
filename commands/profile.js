@@ -286,6 +286,7 @@ exports.default = {
                     case 34: return [3 /*break*/, 46];
                     case 35:
                         targetmember = target.id;
+                        console.log(target.id);
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
                     case 36:
                         data1 = _c.sent();

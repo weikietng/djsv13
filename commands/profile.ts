@@ -265,6 +265,7 @@ export default {
 
       }else{
         const targetmember = target.id;
+        console.log(target.id)
         let data1 = await verifiation.findOne({ DiscordID: `${targetmember}`})
 
         if (data1) {
