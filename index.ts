@@ -24,7 +24,8 @@ client.on('ready', async () => {
         commandsDir: path.join(__dirname, 'commands'),
         // Pass in the new dbOptions
         // Pass in your own mongo connection URI
-        mongoUri: "mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test"
+       // mongoUri: "mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test"
+       mongoUri: process.env["dbLink"]
 
     })
 
