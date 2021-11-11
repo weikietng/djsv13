@@ -56,34 +56,34 @@ exports.default = {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
             var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, targetmember, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata;
-            var _b, _c, _d, _e, _f, _g;
-            return __generator(this, function (_h) {
-                switch (_h.label) {
+            var _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         if (!message) return [3 /*break*/, 23];
                         target = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first();
                         if (!!target) return [3 /*break*/, 12];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + message.author.id })];
                     case 1:
-                        data1 = _h.sent();
+                        data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 10];
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
                     case 2:
-                        username = _h.sent();
+                        username = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
                     case 3:
-                        rank = _h.sent();
+                        rank = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
                     case 4:
-                        avatar = _h.sent();
+                        avatar = _c.sent();
                         embed = new discord_js_1.MessageEmbed();
                         return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 5:
-                        cashdata = _h.sent();
+                        cashdata = _c.sent();
                         if (!cashdata) return [3 /*break*/, 7];
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 6:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -105,7 +105,7 @@ exports.default = {
                         return [3 /*break*/, 9];
                     case 7: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 8:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -124,7 +124,7 @@ exports.default = {
                                 .setColor("BLUE");
                             message.reply({ embeds: [embed2] });
                         }
-                        _h.label = 9;
+                        _c.label = 9;
                     case 9: return [3 /*break*/, 11];
                     case 10:
                         embedNodata = new discord_js_1.MessageEmbed()
@@ -133,29 +133,29 @@ exports.default = {
                             .setFooter("Cereza Profile")
                             .setColor("RED");
                         message.reply({ embeds: [embedNodata] });
-                        _h.label = 11;
+                        _c.label = 11;
                     case 11: return [3 /*break*/, 23];
                     case 12: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 13:
-                        data1 = _h.sent();
+                        data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 22];
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
                     case 14:
-                        username = _h.sent();
+                        username = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
                     case 15:
-                        rank = _h.sent();
+                        rank = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
                     case 16:
-                        avatar = _h.sent();
+                        avatar = _c.sent();
                         embed = new discord_js_1.MessageEmbed();
                         return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 17:
-                        cashdata = _h.sent();
+                        cashdata = _c.sent();
                         if (!cashdata) return [3 /*break*/, 19];
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 18:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -177,7 +177,7 @@ exports.default = {
                         return [3 /*break*/, 21];
                     case 19: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 20:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -196,7 +196,7 @@ exports.default = {
                                 .setColor("BLUE");
                             message.reply({ embeds: [embed2] });
                         }
-                        _h.label = 21;
+                        _c.label = 21;
                     case 21: return [3 /*break*/, 23];
                     case 22:
                         embedNodata = new discord_js_1.MessageEmbed()
@@ -205,32 +205,32 @@ exports.default = {
                             .setFooter("Cereza Profile")
                             .setColor("RED");
                         message.reply({ embeds: [embedNodata] });
-                        _h.label = 23;
+                        _c.label = 23;
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
                         target = interaction.options.getMember('target');
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
-                        data1 = _h.sent();
+                        data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 33];
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
                     case 25:
-                        username = _h.sent();
+                        username = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
                     case 26:
-                        rank = _h.sent();
+                        rank = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
                     case 27:
-                        avatar = _h.sent();
+                        avatar = _c.sent();
                         embed = new discord_js_1.MessageEmbed();
                         return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 28:
-                        cashdata = _h.sent();
+                        cashdata = _c.sent();
                         if (!cashdata) return [3 /*break*/, 30];
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 29:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -238,7 +238,7 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
+                            interaction.reply({ embeds: [embed1] });
                         }
                         else {
                             embed2 = new discord_js_1.MessageEmbed()
@@ -247,12 +247,12 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
+                            interaction.reply({ embeds: [embed2] });
                         }
                         return [3 /*break*/, 32];
                     case 30: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 31:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -260,7 +260,7 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
+                            interaction.reply({ embeds: [embed1] });
                         }
                         else {
                             embed2 = new discord_js_1.MessageEmbed()
@@ -269,9 +269,9 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
+                            interaction.reply({ embeds: [embed2] });
                         }
-                        _h.label = 32;
+                        _c.label = 32;
                     case 32: return [3 /*break*/, 34];
                     case 33:
                         embedNodata = new discord_js_1.MessageEmbed()
@@ -279,32 +279,32 @@ exports.default = {
                             .setDescription("\n Please ensure that you are verified.")
                             .setFooter("Cereza Profile")
                             .setColor("RED");
-                        message.reply({ embeds: [embedNodata] });
-                        _h.label = 34;
+                        interaction.reply({ embeds: [embedNodata] });
+                        _c.label = 34;
                     case 34: return [3 /*break*/, 46];
                     case 35:
                         targetmember = target.id;
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
                     case 36:
-                        data1 = _h.sent();
+                        data1 = _c.sent();
                         if (!data1) return [3 /*break*/, 45];
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
                     case 37:
-                        username = _h.sent();
+                        username = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
                     case 38:
-                        rank = _h.sent();
+                        rank = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
                     case 39:
-                        avatar = _h.sent();
+                        avatar = _c.sent();
                         embed = new discord_js_1.MessageEmbed();
                         return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 40:
-                        cashdata = _h.sent();
+                        cashdata = _c.sent();
                         if (!cashdata) return [3 /*break*/, 42];
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 41:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -312,7 +312,7 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            (_c = interaction.channel) === null || _c === void 0 ? void 0 : _c.send({ embeds: [embed1] });
+                            interaction.reply({ embeds: [embed1] });
                         }
                         else {
                             embed2 = new discord_js_1.MessageEmbed()
@@ -321,12 +321,12 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            (_d = interaction.channel) === null || _d === void 0 ? void 0 : _d.send({ embeds: [embed2] });
+                            interaction.reply({ embeds: [embed2] });
                         }
                         return [3 /*break*/, 44];
                     case 42: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 43:
-                        bandata = _h.sent();
+                        bandata = _c.sent();
                         if (bandata) {
                             embed1 = new discord_js_1.MessageEmbed()
                                 .setTitle("__Profile__")
@@ -334,7 +334,7 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            (_e = interaction.channel) === null || _e === void 0 ? void 0 : _e.send({ embeds: [embed1] });
+                            interaction.reply({ embeds: [embed1] });
                         }
                         else {
                             embed2 = new discord_js_1.MessageEmbed()
@@ -343,9 +343,9 @@ exports.default = {
                                 .setFooter("Cereza Profile")
                                 .setThumbnail("" + avatar[0].imageUrl)
                                 .setColor("BLUE");
-                            (_f = interaction.channel) === null || _f === void 0 ? void 0 : _f.send({ embeds: [embed2] });
+                            interaction.reply({ embeds: [embed2] });
                         }
-                        _h.label = 44;
+                        _c.label = 44;
                     case 44: return [3 /*break*/, 46];
                     case 45:
                         embedNodata = new discord_js_1.MessageEmbed()
@@ -353,8 +353,8 @@ exports.default = {
                             .setDescription("\n Please ensure that the target is verified.")
                             .setFooter("Cereza Profile")
                             .setColor("RED");
-                        (_g = interaction.channel) === null || _g === void 0 ? void 0 : _g.send({ embeds: [embedNodata] });
-                        _h.label = 46;
+                        interaction.reply({ embeds: [embedNodata] });
+                        _c.label = 46;
                     case 46: return [2 /*return*/];
                 }
             });

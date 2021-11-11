@@ -205,7 +205,7 @@ export default {
             .setThumbnail(`${avatar[0].imageUrl}`)
             .setColor("BLUE")
 
-            message.reply({embeds: [embed1]})
+            interaction.reply({embeds: [embed1]})
 
           }else{
             const embed2 = new MessageEmbed()
@@ -215,7 +215,7 @@ export default {
             .setThumbnail(`${avatar[0].imageUrl}`)
             .setColor("BLUE")
             
-            message.reply({embeds: [embed2]})
+            interaction.reply({embeds: [embed2]})
 
 
           }
@@ -233,7 +233,7 @@ export default {
             .setThumbnail(`${avatar[0].imageUrl}`)
             .setColor("BLUE")
 
-            message.reply({embeds: [embed1]})
+            interaction.reply({embeds: [embed1]})
 
           }else{
             const embed2 = new MessageEmbed()
@@ -243,7 +243,7 @@ export default {
             .setThumbnail(`${avatar[0].imageUrl}`)
             .setColor("BLUE")
             
-            message.reply({embeds: [embed2]})
+            interaction.reply({embeds: [embed2]})
 
 
           }
@@ -257,7 +257,7 @@ export default {
           .setFooter("Cereza Profile")
           .setColor("RED")
 
-          message.reply({embeds: [embedNodata]})
+          interaction.reply({embeds: [embedNodata]})
       }
 
       }else{
@@ -283,7 +283,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
   
-              interaction.channel?.send({embeds: [embed1]})
+              interaction.reply({embeds: [embed1]})
   
             }else{
               const embed2 = new MessageEmbed()
@@ -293,7 +293,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
               
-              interaction.channel?.send({embeds: [embed2]})
+              interaction.reply({embeds: [embed2]})
   
   
             }
@@ -311,7 +311,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
   
-              interaction.channel?.send({embeds: [embed1]})
+              interaction.reply({embeds: [embed1]})
   
             }else{
               const embed2 = new MessageEmbed()
@@ -321,7 +321,7 @@ export default {
               .setThumbnail(`${avatar[0].imageUrl}`)
               .setColor("BLUE")
               
-              interaction.channel?.send({embeds:[embed2]})
+              interaction.reply({embeds:[embed2]})
   
   
             }
@@ -335,7 +335,7 @@ export default {
             .setFooter("Cereza Profile")
             .setColor("RED")
   
-            interaction.channel?.send({embeds: [embedNodata]})
+            interaction.reply({embeds: [embedNodata]})
         }
       }
     }
