@@ -185,7 +185,7 @@ export default {
     }
     if (interaction) {
       let target = interaction.options.getMember('user') as GuildMember;
-      
+      console.log(`Target: ${target.displayName}`)
       if(!target){
         let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })
 
@@ -263,7 +263,7 @@ export default {
           interaction.reply({embeds: [embedNodata]})
       }
 
-      }else{
+      }else if (target){
         const targetmember = target.id;
         console.log(target.id)
         let data1 = await verifiation.findOne({ DiscordID: `${targetmember}`})

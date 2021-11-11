@@ -213,6 +213,7 @@ exports.default = {
                     case 23:
                         if (!interaction) return [3 /*break*/, 46];
                         target = interaction.options.getMember('user');
+                        console.log("Target: " + target.displayName);
                         if (!!target) return [3 /*break*/, 35];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
                     case 24:
@@ -287,6 +288,7 @@ exports.default = {
                         _c.label = 34;
                     case 34: return [3 /*break*/, 46];
                     case 35:
+                        if (!target) return [3 /*break*/, 46];
                         targetmember = target.id;
                         console.log(target.id);
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
