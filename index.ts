@@ -24,11 +24,12 @@ client.on('ready', async () => {
         commandsDir: path.join(__dirname, 'commands'),
         // Pass in the new dbOptions
         // Pass in your own mongo connection URI
+        mongoUri: `${process.env.dbLink}`
 
     })
 
     const mongoose = require('mongoose')
-    mongoose.connect("mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test")
+    
     var db = mongoose.connection;
 
     db.on("error", console.error.bind(console, "connection error:"));

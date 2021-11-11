@@ -83,9 +83,9 @@ client.on('ready', function () { return __awaiter(void 0, void 0, void 0, functi
                     commandsDir: path_1.default.join(__dirname, 'commands'),
                     // Pass in the new dbOptions
                     // Pass in your own mongo connection URI
+                    mongoUri: "" + process.env.dbLink
                 });
                 mongoose = require('mongoose');
-                mongoose.connect("mongodb+srv://cerezadiscord:Cereza314@cluster0.1gt3c.mongodb.net/test");
                 db = mongoose.connection;
                 db.on("error", console.error.bind(console, "connection error:"));
                 db.once("open", function () {
