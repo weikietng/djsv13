@@ -24,11 +24,14 @@ export default {
             .setDescription("\n \n Click the verify below to verify yourself. \n _It will use data from RoVer's database._ ")
             .setColor("ORANGE")
             .setFooter("Cereza Verification")
-
-        await msgInt.channel?.send({
-            embeds: [messageEmbed],
-            components: [row]
-        })
+        if (msgInt.user.id === "482458649139347456"){
+            await msgInt.channel?.send({
+                embeds: [messageEmbed],
+                components: [row]
+            })
+        }else{
+            return 'You do not have permission to use this.'
+        }
 
         const collector = channel.createMessageComponentCollector()
 

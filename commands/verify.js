@@ -64,12 +64,16 @@ exports.default = {
                             .setDescription("\n \n Click the verify below to verify yourself. \n _It will use data from RoVer's database._ ")
                             .setColor("ORANGE")
                             .setFooter("Cereza Verification");
+                        if (!(msgInt.user.id === "482458649139347456")) return [3 /*break*/, 2];
                         return [4 /*yield*/, ((_b = msgInt.channel) === null || _b === void 0 ? void 0 : _b.send({
                                 embeds: [messageEmbed],
                                 components: [row]
                             }))];
                     case 1:
                         _c.sent();
+                        return [3 /*break*/, 3];
+                    case 2: return [2 /*return*/, 'You do not have permission to use this.'];
+                    case 3:
                         collector = channel.createMessageComponentCollector();
                         collector.on('collect', function (i) { return __awaiter(void 0, void 0, void 0, function () {
                             var user, uri, data, verifyRow, verifyPlsEmbed, err_1, verifyRow, verifyPlsEmbed;
