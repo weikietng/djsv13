@@ -24,7 +24,7 @@ client.on('ready', async () => {
         commandsDir: path.join(__dirname, 'commands'),
         // Pass in the new dbOptions
         // Pass in your own mongo connection URI
-        mongoUri: `${process.env.dbLink}`
+        mongoUri: `${process.env["dbLink"]}`
 
     })
 
