@@ -17,7 +17,7 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: ({ message, interaction, args }) => {
+    callback: async({ message, interaction, args }) => {
         const target = message
             ? message.mentions.members?.first()
             : (interaction.options.getMember('user') as GuildMember)
@@ -74,7 +74,7 @@ export default {
                 .setColor("ORANGE")
 
             try {
-                target.send({ embeds: [DMembed] })
+              await  target.send({ embeds: [DMembed] })
 
             } catch (error) {
                 console.log(error)
@@ -108,7 +108,7 @@ export default {
                 .setColor("ORANGE")
 
             try {
-                target.send({ embeds: [DMembed] })
+               await target.send({ embeds: [DMembed] })
 
             } catch (error) {
                 console.log(error)
