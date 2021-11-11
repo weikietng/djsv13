@@ -72,17 +72,20 @@ exports.default = {
                         _c.sent();
                         collector = channel.createMessageComponentCollector();
                         collector.on('collect', function (i) { return __awaiter(void 0, void 0, void 0, function () {
-                            var user, uri, data, verifyRow, verifyPlsEmbed;
+                            var user, uri, data, verifyRow, verifyPlsEmbed, err_1, verifyRow, verifyPlsEmbed;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
-                                        if (!(i.customId === 'Verification_Init')) return [3 /*break*/, 4];
+                                        if (!(i.customId === 'Verification_Init')) return [3 /*break*/, 8];
                                         user = i.user;
                                         uri = "https://verify.eryn.io/api/user/" + user.id;
-                                        return [4 /*yield*/, axios_1.default.get(uri)];
+                                        _a.label = 1;
                                     case 1:
+                                        _a.trys.push([1, 6, , 8]);
+                                        return [4 /*yield*/, axios_1.default.get(uri)];
+                                    case 2:
                                         data = (_a.sent()).data;
-                                        if (!(data.status === "error")) return [3 /*break*/, 3];
+                                        if (!(data.status === "error")) return [3 /*break*/, 4];
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
                                             .setCustomId('RoVerLink')
@@ -99,16 +102,38 @@ exports.default = {
                                                 components: [verifyRow],
                                                 ephemeral: true
                                             })];
-                                    case 2:
+                                    case 3:
                                         _a.sent();
                                         return [2 /*return*/];
-                                    case 3:
+                                    case 4:
                                         i.reply({
                                             content: "You are verified, user is " + data.robloxUsername,
                                             ephemeral: true
                                         });
-                                        _a.label = 4;
-                                    case 4: return [2 /*return*/];
+                                        _a.label = 5;
+                                    case 5: return [3 /*break*/, 8];
+                                    case 6:
+                                        err_1 = _a.sent();
+                                        verifyRow = new discord_js_1.MessageActionRow()
+                                            .addComponents(new discord_js_1.MessageButton()
+                                            .setCustomId('RoVerLink')
+                                            .setURL('https://rover.link/login/')
+                                            .setLabel('Verify account here')
+                                            .setStyle('LINK'));
+                                        verifyPlsEmbed = new discord_js_1.MessageEmbed()
+                                            .setTitle("**You are not verified**")
+                                            .setDescription("Please verify yourself with RoVer by clicking on the button below.")
+                                            .setColor("YELLOW")
+                                            .setFooter("Cereza Verification");
+                                        return [4 /*yield*/, i.reply({
+                                                embeds: [verifyPlsEmbed],
+                                                components: [verifyRow],
+                                                ephemeral: true
+                                            })];
+                                    case 7:
+                                        _a.sent();
+                                        return [2 /*return*/];
+                                    case 8: return [2 /*return*/];
                                 }
                             });
                         }); });

@@ -36,7 +36,12 @@ export default {
             if (i.customId === 'Verification_Init') {
                 let user = i.user
                 let uri = `https://verify.eryn.io/api/user/${user.id}`
-                const { data } = await axios.get(uri)
+               
+               try{
+
+                const { data } =  await axios.get(uri)
+
+              
                 if (data.status === "error") {
                     const verifyRow = new MessageActionRow()
                         .addComponents(
@@ -68,6 +73,34 @@ export default {
 
                 }
 
+
+
+               }catch(err){
+
+
+                const verifyRow = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setCustomId('RoVerLink')
+                                .setURL('https://rover.link/login/')
+                                .setLabel('Verify account here')
+                                .setStyle('LINK')
+                        )
+
+                    let verifyPlsEmbed = new MessageEmbed()
+                        .setTitle("**You are not verified**")
+                        .setDescription("Please verify yourself with RoVer by clicking on the button below.")
+                        .setColor("YELLOW")
+                        .setFooter("Cereza Verification")
+                    await i.reply({
+                        embeds: [verifyPlsEmbed],
+                        components: [verifyRow],
+                        ephemeral: true
+                    })
+                    return
+               }
+               
+                
 
             }
 
