@@ -54,14 +54,14 @@ exports.default = {
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target;
+            var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target;
             var _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        if (!message) return [3 /*break*/, 11];
+                        if (!message) return [3 /*break*/, 23];
                         target = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first();
-                        if (!!target) return [3 /*break*/, 11];
+                        if (!!target) return [3 /*break*/, 12];
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + message.author.id })];
                     case 1:
                         data1 = _c.sent();
@@ -133,7 +133,79 @@ exports.default = {
                             .setColor("RED");
                         message.reply({ embeds: [embedNodata] });
                         _c.label = 11;
-                    case 11:
+                    case 11: return [3 /*break*/, 23];
+                    case 12: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
+                    case 13:
+                        data1 = _c.sent();
+                        if (!data1) return [3 /*break*/, 22];
+                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
+                    case 14:
+                        username = _c.sent();
+                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
+                    case 15:
+                        rank = _c.sent();
+                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
+                    case 16:
+                        avatar = _c.sent();
+                        embed = new discord_js_1.MessageEmbed();
+                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
+                    case 17:
+                        cashdata = _c.sent();
+                        if (!cashdata) return [3 /*break*/, 19];
+                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
+                    case 18:
+                        bandata = _c.sent();
+                        if (bandata) {
+                            embed1 = new discord_js_1.MessageEmbed()
+                                .setTitle("__Profile__")
+                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
+                                .setFooter("Cereza Profile")
+                                .setThumbnail("" + avatar[0].imageUrl)
+                                .setColor("BLUE");
+                            message.reply({ embeds: [embed1] });
+                        }
+                        else {
+                            embed2 = new discord_js_1.MessageEmbed()
+                                .setTitle("__Profile__")
+                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** No ban data found.")
+                                .setFooter("Cereza Profile")
+                                .setThumbnail("" + avatar[0].imageUrl)
+                                .setColor("BLUE");
+                            message.reply({ embeds: [embed2] });
+                        }
+                        return [3 /*break*/, 21];
+                    case 19: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
+                    case 20:
+                        bandata = _c.sent();
+                        if (bandata) {
+                            embed1 = new discord_js_1.MessageEmbed()
+                                .setTitle("__Profile__")
+                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
+                                .setFooter("Cereza Profile")
+                                .setThumbnail("" + avatar[0].imageUrl)
+                                .setColor("BLUE");
+                            message.reply({ embeds: [embed1] });
+                        }
+                        else {
+                            embed2 = new discord_js_1.MessageEmbed()
+                                .setTitle("__Profile__")
+                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.")
+                                .setFooter("Cereza Profile")
+                                .setThumbnail("" + avatar[0].imageUrl)
+                                .setColor("BLUE");
+                            message.reply({ embeds: [embed2] });
+                        }
+                        _c.label = 21;
+                    case 21: return [3 /*break*/, 23];
+                    case 22:
+                        embedNodata = new discord_js_1.MessageEmbed()
+                            .setTitle("__No Data Found__")
+                            .setDescription("\n Please ensure that the target is verified.")
+                            .setFooter("Cereza Profile")
+                            .setColor("RED");
+                        message.reply({ embeds: [embedNodata] });
+                        _c.label = 23;
+                    case 23:
                         if (interaction) {
                             target = interaction.options.getMember('target');
                             interaction.reply(interaction.user.username + " testing");
