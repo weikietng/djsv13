@@ -164,7 +164,7 @@ export default {
 
                         
                         i.reply({
-                            content: `You are already verified. Use !update to update your data instead.`,
+                            content: `You are already verified. Use /getroles to update your data instead.`,
                             ephemeral: true
                         })
 
