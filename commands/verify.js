@@ -41,6 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
 var axios_1 = __importDefault(require("axios"));
+var noblox_js_1 = __importDefault(require("noblox.js"));
+var account_1 = __importDefault(require("../models/account"));
 exports.default = {
     category: 'Setup',
     description: 'Setup verification button',
@@ -76,19 +78,20 @@ exports.default = {
                     case 3:
                         collector = channel.createMessageComponentCollector();
                         collector.on('collect', function (i) { return __awaiter(void 0, void 0, void 0, function () {
-                            var user, uri, data, verifyRow, verifyPlsEmbed, err_1, verifyRow, verifyPlsEmbed;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
+                            var user, uri, data, verifyRow, verifyPlsEmbed, data1, rUsernamefromID, playerID, newPlayerDataInstance, memberItem, rankName_1, RankNumber, rRole, verifiedEmbed, error_1, ErrorEmbed, err_1, verifyRow, verifyPlsEmbed;
+                            var _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
                                     case 0:
-                                        if (!(i.customId === 'Verification_Init')) return [3 /*break*/, 8];
+                                        if (!(i.customId === 'Verification_Init')) return [3 /*break*/, 39];
                                         user = i.user;
                                         uri = "https://verify.eryn.io/api/user/" + user.id;
-                                        _a.label = 1;
+                                        _b.label = 1;
                                     case 1:
-                                        _a.trys.push([1, 6, , 8]);
+                                        _b.trys.push([1, 37, , 39]);
                                         return [4 /*yield*/, axios_1.default.get(uri)];
                                     case 2:
-                                        data = (_a.sent()).data;
+                                        data = (_b.sent()).data;
                                         if (!(data.status === "error")) return [3 /*break*/, 4];
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
@@ -106,17 +109,136 @@ exports.default = {
                                                 ephemeral: true
                                             })];
                                     case 3:
-                                        _a.sent();
+                                        _b.sent();
                                         return [2 /*return*/];
-                                    case 4:
+                                    case 4: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + user.id })];
+                                    case 5:
+                                        data1 = _b.sent();
+                                        if (!!data1) return [3 /*break*/, 35];
+                                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(Number(data.robloxId))];
+                                    case 6:
+                                        rUsernamefromID = _b.sent();
+                                        playerID = "" + data.robloxId;
+                                        newPlayerDataInstance = new account_1.default({
+                                            RobloxUserID: playerID,
+                                            DiscordID: user.id,
+                                        });
+                                        return [4 /*yield*/, newPlayerDataInstance.save()];
+                                    case 7:
+                                        _b.sent();
+                                        memberItem = i.member;
+                                        _b.label = 8;
+                                    case 8:
+                                        _b.trys.push([8, 32, , 34]);
+                                        memberItem.setNickname(rUsernamefromID);
+                                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data.robloxId))];
+                                    case 9:
+                                        rankName_1 = _b.sent();
+                                        return [4 /*yield*/, noblox_js_1.default.getRankInGroup(5206353, Number(data.robloxId))
+                                            // Verified Roles
+                                        ];
+                                    case 10:
+                                        RankNumber = _b.sent();
+                                        // Verified Roles
+                                        return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
+                                    case 11:
+                                        // Verified Roles
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.remove(["" + (process.env.Chairman, process.env.ViceChairman, process.env.President, process.env.VicePresident, process.env.PresidentialDepartment, process.env.Developer, process.env.SuperRank, process.env.StaffingDirector, process.env.RelationsDirector, process.env.ServerAdministrator, process.env.ExecutiveAssistant, process.env.SupportTeam, process.env.HighRank, process.env.Coordinator, process.env.GeneralManager, process.env.GeneralManager, process.env.Supervisor, process.env.StaffAssistant, process.env.MiddleRank, process.env.EmergencyResponse, process.env.ManagementIntern, process.env.AdvancedBarista, process.env.Barista, process.env.JuniorBarista, process.env.Trainee, process.env.LowRank, process.env.HonouredCustomer, process.env.ProminentCustomer, process.env.Visitor)])];
+                                    case 12:
+                                        _b.sent();
+                                        rRole = (_a = i.guild) === null || _a === void 0 ? void 0 : _a.roles.cache.find(function (r) { return r.name === rankName_1; });
+                                        console.log(rRole);
+                                        return [4 /*yield*/, memberItem.roles.add("" + rRole)];
+                                    case 13:
+                                        _b.sent();
+                                        if (!(RankNumber >= 7 && RankNumber <= 70)) return [3 /*break*/, 15];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.LowRank)];
+                                    case 14:
+                                        _b.sent();
+                                        return [3 /*break*/, 30];
+                                    case 15:
+                                        if (!(RankNumber >= 75 && RankNumber <= 120)) return [3 /*break*/, 18];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.MiddleRank)];
+                                    case 16:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.EmergencyResponse)];
+                                    case 17:
+                                        _b.sent();
+                                        return [3 /*break*/, 30];
+                                    case 18:
+                                        if (!(RankNumber >= 121 && RankNumber <= 140)) return [3 /*break*/, 24];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.HighRank)];
+                                    case 19:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.EmergencyResponse)];
+                                    case 20:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SupportTeam)];
+                                    case 21:
+                                        _b.sent();
+                                        if (!(RankNumber >= 130)) return [3 /*break*/, 23];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                    case 22:
+                                        _b.sent();
+                                        _b.label = 23;
+                                    case 23: return [3 /*break*/, 30];
+                                    case 24:
+                                        if (!(RankNumber >= 200 && RankNumber <= 255)) return [3 /*break*/, 30];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SuperRank)];
+                                    case 25:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.EmergencyResponse)];
+                                    case 26:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SupportTeam)];
+                                    case 27:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                    case 28:
+                                        _b.sent();
+                                        if (!(RankNumber >= 240)) return [3 /*break*/, 30];
+                                        return [4 /*yield*/, memberItem.roles.add("857544805298602004")];
+                                    case 29:
+                                        _b.sent();
+                                        _b.label = 30;
+                                    case 30:
+                                        verifiedEmbed = new discord_js_1.MessageEmbed()
+                                            .setTitle("**Verification Success**")
+                                            .setDescription("\n Your roles should be updated within the next few minutes.")
+                                            .setFooter("Cereza Verification")
+                                            .setColor("GREEN");
+                                        return [4 /*yield*/, i.reply({
+                                                embeds: [verifiedEmbed],
+                                                ephemeral: true
+                                            })];
+                                    case 31:
+                                        _b.sent();
+                                        return [2 /*return*/];
+                                    case 32:
+                                        error_1 = _b.sent();
+                                        ErrorEmbed = new discord_js_1.MessageEmbed()
+                                            .setTitle("**Error Occurred**")
+                                            .setDescription("\n Please screenshot this and send this to DamienAngel0828 \n \n " + error_1)
+                                            .setColor("RED")
+                                            .setFooter("Cereza Verification");
+                                        return [4 /*yield*/, i.reply({
+                                                embeds: [ErrorEmbed],
+                                                ephemeral: true
+                                            })];
+                                    case 33:
+                                        _b.sent();
+                                        return [2 /*return*/];
+                                    case 34: return [3 /*break*/, 35];
+                                    case 35:
                                         i.reply({
-                                            content: "You are verified, user is " + data.robloxUsername,
+                                            content: "You are already verified. Use !update to update your data instead.",
                                             ephemeral: true
                                         });
-                                        _a.label = 5;
-                                    case 5: return [3 /*break*/, 8];
-                                    case 6:
-                                        err_1 = _a.sent();
+                                        _b.label = 36;
+                                    case 36: return [3 /*break*/, 39];
+                                    case 37:
+                                        err_1 = _b.sent();
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
                                             .setURL('https://rover.link/login/')
@@ -132,10 +254,10 @@ exports.default = {
                                                 components: [verifyRow],
                                                 ephemeral: true
                                             })];
-                                    case 7:
-                                        _a.sent();
+                                    case 38:
+                                        _b.sent();
                                         return [2 /*return*/];
-                                    case 8: return [2 /*return*/];
+                                    case 39: return [2 /*return*/];
                                 }
                             });
                         }); });
