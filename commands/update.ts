@@ -10,7 +10,7 @@ export default {
     requireRoles: true,
 
 
-    slash: 'both',
+    slash: true,
 
 
     minArgs: 1,
