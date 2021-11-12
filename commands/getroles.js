@@ -45,7 +45,6 @@ var account_1 = __importDefault(require("../models/account"));
 exports.default = {
     category: 'Verification',
     description: "Updates a your role",
-    requireRoles: true,
     slash: true,
     callback: function (_a) {
         var message = _a.message, interaction = _a.interaction, args = _a.args;

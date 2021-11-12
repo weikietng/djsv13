@@ -7,7 +7,7 @@ export default {
     category: 'Verification',
     description: `Updates a your role`,
 
-    requireRoles: true,
+ 
 
 
     slash: true,

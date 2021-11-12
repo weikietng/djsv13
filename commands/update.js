@@ -45,6 +45,7 @@ var account_1 = __importDefault(require("../models/account"));
 exports.default = {
     category: 'Verification',
     description: "Updates a user's role",
+    requireRoles: true,
     slash: true,
     minArgs: 1,
     expectedArgs: '<user>',

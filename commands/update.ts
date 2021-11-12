@@ -6,7 +6,7 @@ import verification from "../models/account"
 export default {
     category: 'Verification',
     description: `Updates a user's role`,
-
+    requireRoles: true,
     slash: true,
 
 
