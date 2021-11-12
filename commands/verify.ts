@@ -126,7 +126,7 @@ export default {
                                     }
 
                                 }
-
+                                await memberItem.roles.add("852583076910727228")
                                 let verifiedEmbed = new MessageEmbed()
                                     .setTitle("**Verification Success**")
                                     .setDescription("\n Your roles should be updated within the next few minutes.")
