@@ -40,6 +40,13 @@ client.on('ready', async () => {
     client.user?.setPresence({ activities: [{ name: 'Cereza | Under Development', type: "LISTENING" }], status: 'idle' });
     const currentUser = await noblox.setCookie(`${process.env["robloxcookie"]}`)
     console.log(`Logged in as ${currentUser.UserName} [${currentUser.UserID}]`)
+
+    
+
+
+
+
+
 })
 
 
