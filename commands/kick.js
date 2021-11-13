@@ -48,7 +48,7 @@ exports.default = {
     callback: function (_a) {
         var message = _a.message, interaction = _a.interaction, args = _a.args;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, noTagEmbed, CannotKickEmbed, reason, noReasonEmbed, DMembed, error_1, KickEmbed, DMembed, error_2, KickEmbed;
+            var target, noTagEmbed, CannotKickEmbed, reason, noReasonEmbed, DMembed, KickEmbed, DMembed, error_1, KickEmbed;
             var _b, _c, _d;
             return __generator(this, function (_e) {
                 switch (_e.label) {
@@ -82,24 +82,18 @@ exports.default = {
                                 .setColor("RED");
                             return [2 /*return*/, noReasonEmbed];
                         }
-                        if (!discord_js_1.Message) return [3 /*break*/, 5];
+                        if (!discord_js_1.Message) return [3 /*break*/, 1];
                         DMembed = new discord_js_1.MessageEmbed()
                             .setTitle("**Cereza Moderation**")
                             .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + ((_c = message.member) === null || _c === void 0 ? void 0 : _c.nickname))
                             .setFooter("Cereza Moderation")
                             .setColor("ORANGE");
-                        _e.label = 1;
-                    case 1:
-                        _e.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, target.send({ embeds: [DMembed] })];
-                    case 2:
-                        _e.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        error_1 = _e.sent();
-                        console.log(error_1);
-                        return [3 /*break*/, 4];
-                    case 4:
+                        /*try {
+                           await target.send({embeds: [DMembed]})
+                    
+                        }catch(error){
+                            console.log(error)
+                        }*/
                         target.kick(reason);
                         KickEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Kicked Succesfully**")
@@ -107,24 +101,24 @@ exports.default = {
                             .setFooter("Cereza Moderation")
                             .setColor("PURPLE");
                         return [2 /*return*/, KickEmbed];
-                    case 5:
+                    case 1:
                         DMembed = new discord_js_1.MessageEmbed()
                             .setTitle("**Cereza Moderation**")
                             .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + interaction.user.username)
                             .setFooter("Cereza Moderation")
                             .setColor("ORANGE");
-                        _e.label = 6;
-                    case 6:
-                        _e.trys.push([6, 8, , 9]);
+                        _e.label = 2;
+                    case 2:
+                        _e.trys.push([2, 4, , 5]);
                         return [4 /*yield*/, target.send({ embeds: [DMembed] })];
-                    case 7:
+                    case 3:
                         _e.sent();
-                        return [3 /*break*/, 9];
-                    case 8:
-                        error_2 = _e.sent();
-                        console.log(error_2);
-                        return [3 /*break*/, 9];
-                    case 9:
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _e.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 5];
+                    case 5:
                         target.kick(reason);
                         KickEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Kicked Succesfully**")

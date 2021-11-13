@@ -73,12 +73,12 @@ export default {
         .setFooter("Cereza Moderation")
         .setColor("ORANGE")
     
-    try {
+    /*try {
        await target.send({embeds: [DMembed]})
 
     }catch(error){
         console.log(error)
-    }
+    }*/
 
 
     target.kick(reason)
