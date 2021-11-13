@@ -85,7 +85,7 @@ exports.default = {
                         if (!discord_js_1.Message) return [3 /*break*/, 5];
                         DMembed = new discord_js_1.MessageEmbed()
                             .setTitle("**Cereza Moderation**")
-                            .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + ((_c = message.member) === null || _c === void 0 ? void 0 : _c.displayName))
+                            .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + ((_c = message.member) === null || _c === void 0 ? void 0 : _c.nickname))
                             .setFooter("Cereza Moderation")
                             .setColor("ORANGE");
                         _e.label = 1;
@@ -103,7 +103,7 @@ exports.default = {
                         target.kick(reason);
                         KickEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Kicked Succesfully**")
-                            .setDescription(target.user.username + " had been kicked. \n \n **Reason: ** " + reason + " \n **Moderator:** " + ((_d = message.member) === null || _d === void 0 ? void 0 : _d.displayName))
+                            .setDescription(target.user.username + " had been kicked. \n \n **Reason: ** " + reason + " \n **Moderator:** " + ((_d = message.member) === null || _d === void 0 ? void 0 : _d.nickname))
                             .setFooter("Cereza Moderation")
                             .setColor("PURPLE");
                         return [2 /*return*/, KickEmbed];

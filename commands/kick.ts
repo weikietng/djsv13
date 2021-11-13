@@ -69,7 +69,7 @@ export default {
     if (Message){
         let DMembed = new MessageEmbed()
         .setTitle("**Cereza Moderation**")
-        .setDescription(`You have been kicked from Cereza for ${reason}. \n \n Moderator: ${message.member?.displayName}`)
+        .setDescription(`You have been kicked from Cereza for ${reason}. \n \n Moderator: ${message.member?.nickname}`)
         .setFooter("Cereza Moderation")
         .setColor("ORANGE")
     
@@ -85,7 +85,7 @@ export default {
 
     let KickEmbed = new MessageEmbed()
     .setTitle("**Kicked Succesfully**")
-    .setDescription(`${target.user.username} had been kicked. \n \n **Reason: ** ${reason} \n **Moderator:** ${message.member?.displayName}`)
+    .setDescription(`${target.user.username} had been kicked. \n \n **Reason: ** ${reason} \n **Moderator:** ${message.member?.nickname}`)
     .setFooter("Cereza Moderation")
     .setColor("PURPLE")
 
