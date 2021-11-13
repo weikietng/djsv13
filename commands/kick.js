@@ -41,92 +41,62 @@ exports.default = {
     category: 'Moderation',
     description: 'Kicks a user',
     requireRoles: true,
-    slash: 'both',
+    slash: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
     callback: function (_a) {
         var message = _a.message, interaction = _a.interaction, args = _a.args;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, noTagEmbed, CannotKickEmbed, reason, noReasonEmbed, DMembed, KickEmbed, DMembed, error_1, KickEmbed;
-            var _b, _c, _d;
-            return __generator(this, function (_e) {
-                switch (_e.label) {
-                    case 0:
-                        target = message
-                            ? (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()
-                            : interaction.options.getMember('user');
-                        if (!target) {
-                            noTagEmbed = new discord_js_1.MessageEmbed()
-                                .setTitle("**No user provided**")
-                                .setDescription("Please tag the user you are trying to kick.")
-                                .setFooter("Cereza Moderation")
-                                .setColor("RED");
-                            return [2 /*return*/, noTagEmbed];
-                        }
-                        if (!target.kickable) {
-                            CannotKickEmbed = new discord_js_1.MessageEmbed()
-                                .setTitle("**Unable to kick**")
-                                .setDescription("You can't kick this user.")
-                                .setFooter("Cereza Moderation")
-                                .setColor("RED");
-                            return [2 /*return*/, CannotKickEmbed];
-                        }
-                        args.shift();
-                        reason = args.join(' ');
-                        if (!reason) {
-                            noReasonEmbed = new discord_js_1.MessageEmbed()
-                                .setTitle("**No reason provided**")
-                                .setDescription("You can't kick this user without a valid reason.")
-                                .setFooter("Cereza Moderation")
-                                .setColor("RED");
-                            return [2 /*return*/, noReasonEmbed];
-                        }
-                        if (!discord_js_1.Message) return [3 /*break*/, 1];
-                        DMembed = new discord_js_1.MessageEmbed()
-                            .setTitle("**Cereza Moderation**")
-                            .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + ((_c = message.member) === null || _c === void 0 ? void 0 : _c.nickname))
-                            .setFooter("Cereza Moderation")
-                            .setColor("ORANGE");
-                        /*try {
-                           await target.send({embeds: [DMembed]})
-                    
-                        }catch(error){
-                            console.log(error)
-                        }*/
-                        target.kick(reason);
-                        KickEmbed = new discord_js_1.MessageEmbed()
-                            .setTitle("**Kicked Succesfully**")
-                            .setDescription(target.user.username + " had been kicked. \n \n **Reason: ** " + reason + " \n **Moderator:** " + ((_d = message.member) === null || _d === void 0 ? void 0 : _d.nickname))
-                            .setFooter("Cereza Moderation")
-                            .setColor("PURPLE");
-                        return [2 /*return*/, KickEmbed];
-                    case 1:
-                        DMembed = new discord_js_1.MessageEmbed()
-                            .setTitle("**Cereza Moderation**")
-                            .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + interaction.user.username)
-                            .setFooter("Cereza Moderation")
-                            .setColor("ORANGE");
-                        _e.label = 2;
-                    case 2:
-                        _e.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, target.send({ embeds: [DMembed] })];
-                    case 3:
-                        _e.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        error_1 = _e.sent();
-                        console.log(error_1);
-                        return [3 /*break*/, 5];
-                    case 5:
-                        target.kick(reason);
-                        KickEmbed = new discord_js_1.MessageEmbed()
-                            .setTitle("**Kicked Succesfully**")
-                            .setDescription(target.user.username + " had been kicked. \n \n **Reason: ** " + reason + " \n **Moderator:** " + interaction.user.username)
-                            .setFooter("Cereza Moderation")
-                            .setColor("PURPLE");
-                        return [2 /*return*/, KickEmbed];
+            var target, noTagEmbed, CannotKickEmbed, reason, noReasonEmbed, DMembed, KickEmbed;
+            return __generator(this, function (_b) {
+                target = interaction.options.getMember('user');
+                console.log(target.nickname);
+                if (!target) {
+                    noTagEmbed = new discord_js_1.MessageEmbed()
+                        .setTitle("**No user provided**")
+                        .setDescription("Please tag the user you are trying to kick.")
+                        .setFooter("Cereza Moderation")
+                        .setColor("RED");
+                    return [2 /*return*/, noTagEmbed];
                 }
+                if (!target.kickable) {
+                    CannotKickEmbed = new discord_js_1.MessageEmbed()
+                        .setTitle("**Unable to kick**")
+                        .setDescription("You can't kick this user.")
+                        .setFooter("Cereza Moderation")
+                        .setColor("RED");
+                    return [2 /*return*/, CannotKickEmbed];
+                }
+                args.shift();
+                reason = args.join(' ');
+                if (!reason) {
+                    noReasonEmbed = new discord_js_1.MessageEmbed()
+                        .setTitle("**No reason provided**")
+                        .setDescription("You can't kick this user without a valid reason.")
+                        .setFooter("Cereza Moderation")
+                        .setColor("RED");
+                    return [2 /*return*/, noReasonEmbed];
+                }
+                DMembed = new discord_js_1.MessageEmbed()
+                    .setTitle("**Cereza Moderation**")
+                    .setDescription("You have been kicked from Cereza for " + reason + ". \n \n Moderator: " + interaction.user.username)
+                    .setFooter("Cereza Moderation")
+                    .setColor("ORANGE");
+                /* try{
+                    await target.send({embeds: [DMembed]})
+             
+                 }catch(error){
+                     console.log(error)
+             
+                 }*/
+                target.kick(reason);
+                KickEmbed = new discord_js_1.MessageEmbed()
+                    .setTitle("**Kicked Succesfully**")
+                    .setDescription(target.user.username + " had been kicked. \n \n **Reason: ** " + reason + " \n **Moderator:** " + interaction.user.username)
+                    .setFooter("Cereza Moderation")
+                    .setColor("PURPLE");
+                return [2 /*return*/, KickEmbed];
             });
         });
     },
