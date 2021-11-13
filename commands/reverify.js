@@ -72,7 +72,7 @@ exports.default = {
                             .setDescription("\n 1. Click on the 'Go to Rover' button below and head to RoVer. \n 2. Log in with your Discord. \n 3. Click on 'Change' to change your verified account. \n 4. Follow the instruction on RoVer's website. \n 5. Click on the 'Done' button below.")
                             .setFooter("Cereza Verification")
                             .setColor("BLUE");
-                        return [4 /*yield*/, msgInt.reply({ embeds: [initEmbed], ephemeral: true })];
+                        return [4 /*yield*/, msgInt.reply({ embeds: [initEmbed], components: [row], ephemeral: true })];
                     case 2:
                         _b.sent();
                         collector = channel.createMessageComponentCollector();

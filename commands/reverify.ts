@@ -37,7 +37,7 @@ export default {
                 .setFooter("Cereza Verification")
                 .setColor("BLUE")
 
-            await msgInt.reply({ embeds: [initEmbed], ephemeral: true })
+            await msgInt.reply({ embeds: [initEmbed], components:[row], ephemeral: true })
 
 
 
