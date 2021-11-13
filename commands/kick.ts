@@ -78,13 +78,6 @@ export default {
 
     }catch(error){
         console.log(error)
-        interaction.channel?.send({embeds:[new MessageEmbed()
-            .setTitle("Error DM'ing user")
-            .setDescription("The user had their DM's set to private. \n However, I will proceed to kick them.")
-            .setFooter("Cereza Modetaion")
-            .setColor("YELLOW")
-        ]})
-
     }
 
 
@@ -109,12 +102,6 @@ export default {
 
     }catch(error){
         console.log(error)
-        interaction.channel?.send({embeds:[new MessageEmbed()
-            .setTitle("Error DM'ing user")
-            .setDescription("The user had their DM's set to private. \n However, I will proceed to kick them.")
-            .setFooter("Cereza Modetaion")
-            .setColor("YELLOW")
-        ]})
 
     }
 
