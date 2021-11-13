@@ -121,7 +121,7 @@ export default {
                                         .setDescription(`You are now reverified as **${rUsernamefromID}**!`)
                                         .setColor("DARK_GREEN")
                                         .setFooter("Cereza Verification")
-                                    await msgInt.editReply({ embeds: [SuccessEmbed] })
+                                    await msgInt.editReply({ embeds: [SuccessEmbed],components:[] })
 
                                 } catch (error){
                                     const ErrorEmbed = new MessageEmbed()

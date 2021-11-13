@@ -196,7 +196,7 @@ exports.default = {
                                             .setDescription("You are now reverified as **" + rUsernamefromID + "**!")
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Verification");
-                                        return [4 /*yield*/, msgInt.editReply({ embeds: [SuccessEmbed] })];
+                                        return [4 /*yield*/, msgInt.editReply({ embeds: [SuccessEmbed], components: [] })];
                                     case 30:
                                         _b.sent();
                                         return [3 /*break*/, 33];
