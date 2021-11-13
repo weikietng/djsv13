@@ -199,7 +199,7 @@ exports.default = {
                                         return [4 /*yield*/, msgInt.editReply({ embeds: [SuccessEmbed], components: [] })];
                                     case 30:
                                         _b.sent();
-                                        return [3 /*break*/, 33];
+                                        return [2 /*return*/];
                                     case 31:
                                         error_1 = _b.sent();
                                         ErrorEmbed = new discord_js_1.MessageEmbed()

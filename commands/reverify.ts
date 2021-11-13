@@ -122,7 +122,7 @@ export default {
                                         .setColor("DARK_GREEN")
                                         .setFooter("Cereza Verification")
                                     await msgInt.editReply({ embeds: [SuccessEmbed],components:[] })
-
+                                    return
                                 } catch (error){
                                     const ErrorEmbed = new MessageEmbed()
                                         .setTitle("**Error Occurred**")
