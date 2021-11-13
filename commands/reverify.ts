@@ -84,7 +84,7 @@ export default {
                                     let rankName = await noblox.getRankNameInGroup(5206353, Number(data.robloxId))
                                     let RankNumber = await noblox.getRankInGroup(5206353, Number(data.robloxId))
                                     memberItem.roles.set([])
-
+                                    await memberItem.roles.add("852583076910727228")
             
                                     if (RankNumber>0){
                                         let rRole = i.guild?.roles.cache.find(r => r.name === rankName)
