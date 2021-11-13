@@ -90,42 +90,38 @@ export default {
                                 memberItem.setNickname(rUsernamefromID)
                                 let rankName = await noblox.getRankNameInGroup(5206353, Number(data.robloxId))
                                 let RankNumber = await noblox.getRankInGroup(5206353, Number(data.robloxId))
-                                // Verified Roles
-                                await memberItem.roles.add("852583076910727228")
+                               
+                                memberItem.roles.set([])
 
-                              // Replace role id in env file|  await memberItem.roles.remove([`${process.env.Chairman, process.env.ViceChairman, process.env.President, process.env.VicePresident, process.env.PresidentialDepartment, process.env.Developer, process.env.SuperRank, process.env.StaffingDirector, process.env.RelationsDirector, process.env.ServerAdministrator, process.env.ExecutiveAssistant, process.env.SupportTeam, process.env.HighRank, process.env.Coordinator, process.env.GeneralManager, process.env.GeneralManager, process.env.Supervisor, process.env.StaffAssistant, process.env.MiddleRank, process.env.EmergencyResponse, process.env.ManagementIntern, process.env.AdvancedBarista, process.env.Barista, process.env.JuniorBarista, process.env.Trainee, process.env.LowRank, process.env.HonouredCustomer, process.env.ProminentCustomer, process.env.Visitor}`])
+            
+                                if (RankNumber>0){
+                                    let rRole = i.guild?.roles.cache.find(r => r.name === rankName)
 
-                                let rRole = i.guild?.roles.cache.find(r => r.name === rankName)
+                                    console.log(rRole)
+                                    await memberItem.roles.add(`${rRole}`)
+                                }
 
-                                console.log(rRole)
-                                await memberItem.roles.add(`${rRole}`)
-                                if (RankNumber >= 7 && RankNumber <= 70) {
-                                    await memberItem.roles.add(`${process.env.LowRank}`)
-                                } else if (RankNumber >= 75 && RankNumber <= 120) {
-                                    await memberItem.roles.add(`${process.env.MiddleRank}`)
-
-                                    await memberItem.roles.add(`${process.env.EmergencyResponse}`)
-
-                                } else if (RankNumber >= 121 && RankNumber <= 140) {
-                                    await memberItem.roles.add(`${process.env.HighRank}`)
-
-                                    await memberItem.roles.add(`${process.env.EmergencyResponse}`)
-                                    await memberItem.roles.add(`${process.env.SupportTeam}`)
-                                    if (RankNumber >= 130) {
-                                        await memberItem.roles.add(`${process.env.ServerAdministrator}`)
-                                    }
-
-                                } else if (RankNumber >= 200 && RankNumber <= 255) {
+                                if(RankNumber >= 200){
                                     await memberItem.roles.add(`${process.env.SuperRank}`)
-
-                                    await memberItem.roles.add(`${process.env.EmergencyResponse}`)
-                                    await memberItem.roles.add(`${process.env.SupportTeam}`)
+                                    await memberItem.roles.add(`${process.env.Emergency}`)
+                                    await memberItem.roles.add(`${process.env.Support}`)
                                     await memberItem.roles.add(`${process.env.ServerAdministrator}`)
-                                    if (RankNumber >= 240) {
+                                    if(RankNumber >=220){
                                         await memberItem.roles.add("857544805298602004")
                                     }
+                                }else if (RankNumber>=121){
+                                    await memberItem.roles.add(`${process.env.HR}`)
+                                    await memberItem.roles.add(`${process.env.Emergency}`)
+                                    await memberItem.roles.add(`${process.env.Support}`)
+                                    await memberItem.roles.add(`${process.env.ServerAdministrator}`)
 
+                                }else if (RankNumber>=70){
+                                    await memberItem.roles.add(`${process.env.MR}`)
+                                    await memberItem.roles.add(`${process.env.Emergency}`)
+                                }else if(RankNumber>=7){
+                                    await memberItem.roles.add(`${process.env.LR}`)
                                 }
+
                                 await memberItem.roles.add("852583076910727228")
                                 let verifiedEmbed = new MessageEmbed()
                                     .setTitle("**Verification Success**")

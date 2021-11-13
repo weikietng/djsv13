@@ -46,9 +46,6 @@ var axios_1 = __importDefault(require("axios"));
 exports.default = {
     category: 'Verification',
     description: 'Reverify your account/switch your account.',
-    aliases: "switchroles",
-    maxArgs: 1,
-    expectedArgs: '[amount]',
     slash: true,
     callback: function (_a) {
         var msgInt = _a.interaction, channel = _a.channel;
@@ -80,19 +77,20 @@ exports.default = {
                         _b.sent();
                         collector = channel.createMessageComponentCollector();
                         collector.on('collect', function (i) { return __awaiter(void 0, void 0, void 0, function () {
-                            var uri, data, verifyRow, verifyPlsEmbed, newRobloxID, rUsernamefromID, playerID, memberItem, rankName, RankNumber, SuccessEmbed, error_1, ErrorEmbed, err_1, verifyRow, verifyPlsEmbed;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
+                            var uri, data, verifyRow, verifyPlsEmbed, newRobloxID, rUsernamefromID, playerID, memberItem, rankName_1, RankNumber, rRole, SuccessEmbed, error_1, ErrorEmbed, err_1, verifyRow, verifyPlsEmbed;
+                            var _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
                                     case 0:
-                                        if (!(i.user.id === msgInt.user.id)) return [3 /*break*/, 17];
-                                        if (!(i.customId === 'Reverification_Init')) return [3 /*break*/, 17];
-                                        _a.label = 1;
+                                        if (!(i.user.id === msgInt.user.id)) return [3 /*break*/, 36];
+                                        if (!(i.customId === 'Reverification_Init')) return [3 /*break*/, 36];
+                                        _b.label = 1;
                                     case 1:
-                                        _a.trys.push([1, 15, , 17]);
+                                        _b.trys.push([1, 34, , 36]);
                                         uri = "https://verify.eryn.io/api/user/" + msgInt.user.id;
                                         return [4 /*yield*/, axios_1.default.get(uri)];
                                     case 2:
-                                        data = (_a.sent()).data;
+                                        data = (_b.sent()).data;
                                         if (!(data.status === "error")) return [3 /*break*/, 4];
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
@@ -110,46 +108,100 @@ exports.default = {
                                                 ephemeral: true
                                             })];
                                     case 3:
-                                        _a.sent();
+                                        _b.sent();
                                         return [2 /*return*/];
                                     case 4:
                                         newRobloxID = data.robloxId;
                                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(Number(data.robloxId))];
                                     case 5:
-                                        rUsernamefromID = _a.sent();
+                                        rUsernamefromID = _b.sent();
                                         playerID = "" + data.robloxId;
                                         return [4 /*yield*/, account_1.default.findOneAndUpdate({ DiscordID: "" + msgInt.user.id }, { RobloxUserID: playerID, DiscordID: msgInt.user.id })];
                                     case 6:
-                                        _a.sent();
-                                        _a.label = 7;
+                                        _b.sent();
+                                        _b.label = 7;
                                     case 7:
-                                        _a.trys.push([7, 12, , 14]);
+                                        _b.trys.push([7, 31, , 33]);
                                         memberItem = msgInt.member;
                                         memberItem.setNickname(rUsernamefromID);
                                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data.robloxId))];
                                     case 8:
-                                        rankName = _a.sent();
-                                        return [4 /*yield*/, noblox_js_1.default.getRankInGroup(5206353, Number(data.robloxId))
-                                            // Verified Roles
-                                        ];
+                                        rankName_1 = _b.sent();
+                                        return [4 /*yield*/, noblox_js_1.default.getRankInGroup(5206353, Number(data.robloxId))];
                                     case 9:
-                                        RankNumber = _a.sent();
-                                        // Verified Roles
-                                        return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
+                                        RankNumber = _b.sent();
+                                        memberItem.roles.set([]);
+                                        if (!(RankNumber > 0)) return [3 /*break*/, 11];
+                                        rRole = (_a = i.guild) === null || _a === void 0 ? void 0 : _a.roles.cache.find(function (r) { return r.name === rankName_1; });
+                                        console.log(rRole);
+                                        return [4 /*yield*/, memberItem.roles.add("" + rRole)];
                                     case 10:
-                                        // Verified Roles
-                                        _a.sent();
+                                        _b.sent();
+                                        _b.label = 11;
+                                    case 11:
+                                        if (!(RankNumber >= 200)) return [3 /*break*/, 18];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SuperRank)];
+                                    case 12:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                    case 13:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Support)];
+                                    case 14:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                    case 15:
+                                        _b.sent();
+                                        if (!(RankNumber >= 220)) return [3 /*break*/, 17];
+                                        return [4 /*yield*/, memberItem.roles.add("857544805298602004")];
+                                    case 16:
+                                        _b.sent();
+                                        _b.label = 17;
+                                    case 17: return [3 /*break*/, 28];
+                                    case 18:
+                                        if (!(RankNumber >= 121)) return [3 /*break*/, 23];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.HR)];
+                                    case 19:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                    case 20:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Support)];
+                                    case 21:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                    case 22:
+                                        _b.sent();
+                                        return [3 /*break*/, 28];
+                                    case 23:
+                                        if (!(RankNumber >= 70)) return [3 /*break*/, 26];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.MR)];
+                                    case 24:
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                    case 25:
+                                        _b.sent();
+                                        return [3 /*break*/, 28];
+                                    case 26:
+                                        if (!(RankNumber >= 7)) return [3 /*break*/, 28];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.LR)];
+                                    case 27:
+                                        _b.sent();
+                                        _b.label = 28;
+                                    case 28: return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
+                                    case 29:
+                                        _b.sent();
                                         SuccessEmbed = new discord_js_1.MessageEmbed()
                                             .setTitle("**Reverification Success**")
                                             .setDescription("You are now reverified as **" + rUsernamefromID + "**!")
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Verification");
                                         return [4 /*yield*/, msgInt.editReply({ embeds: [SuccessEmbed] })];
-                                    case 11:
-                                        _a.sent();
-                                        return [3 /*break*/, 14];
-                                    case 12:
-                                        error_1 = _a.sent();
+                                    case 30:
+                                        _b.sent();
+                                        return [3 /*break*/, 33];
+                                    case 31:
+                                        error_1 = _b.sent();
                                         ErrorEmbed = new discord_js_1.MessageEmbed()
                                             .setTitle("**Error Occurred**")
                                             .setDescription("\n Please screenshot this and send this to DamienAngel0828 \n \n " + error_1)
@@ -159,12 +211,12 @@ exports.default = {
                                                 embeds: [ErrorEmbed],
                                                 ephemeral: true
                                             })];
-                                    case 13:
-                                        _a.sent();
+                                    case 32:
+                                        _b.sent();
                                         return [2 /*return*/];
-                                    case 14: return [3 /*break*/, 17];
-                                    case 15:
-                                        err_1 = _a.sent();
+                                    case 33: return [3 /*break*/, 36];
+                                    case 34:
+                                        err_1 = _b.sent();
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
                                             .setURL('https://rover.link/login/')
@@ -180,10 +232,10 @@ exports.default = {
                                                 components: [verifyRow],
                                                 ephemeral: true
                                             })];
-                                    case 16:
-                                        _a.sent();
+                                    case 35:
+                                        _b.sent();
                                         return [2 /*return*/];
-                                    case 17: return [2 /*return*/];
+                                    case 36: return [2 /*return*/];
                                 }
                             });
                         }); });

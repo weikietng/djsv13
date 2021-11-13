@@ -58,14 +58,14 @@ exports.default = {
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 1:
                         data1 = _c.sent();
-                        if (!data1) return [3 /*break*/, 31];
+                        if (!data1) return [3 /*break*/, 30];
                         RobloxUserID = data1.RobloxUserID;
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(Number(RobloxUserID))];
                     case 2:
                         rUsernamefromID = _c.sent();
                         _c.label = 3;
                     case 3:
-                        _c.trys.push([3, 28, , 30]);
+                        _c.trys.push([3, 27, , 29]);
                         target.setNickname(rUsernamefromID);
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(RobloxUserID))];
                     case 4:
@@ -76,70 +76,66 @@ exports.default = {
                     case 5:
                         RankNumber = _c.sent();
                         // Verified Roles
-                        return [4 /*yield*/, target.roles.add("852583076910727228")];
-                    case 6:
-                        // Verified Roles
-                        _c.sent();
-                        return [4 /*yield*/, target.roles.remove(["" + (process.env.Chairman, process.env.ViceChairman, process.env.President, process.env.VicePresident, process.env.PresidentialDepartment, process.env.Developer, process.env.SuperRank, process.env.StaffingDirector, process.env.RelationsDirector, process.env.ServerAdministrator, process.env.ExecutiveAssistant, process.env.SupportTeam, process.env.HighRank, process.env.Coordinator, process.env.GeneralManager, process.env.GeneralManager, process.env.Supervisor, process.env.StaffAssistant, process.env.MiddleRank, process.env.EmergencyResponse, process.env.ManagementIntern, process.env.AdvancedBarista, process.env.Barista, process.env.JuniorBarista, process.env.Trainee, process.env.LowRank, process.env.HonouredCustomer, process.env.ProminentCustomer, process.env.Visitor)])];
-                    case 7:
-                        _c.sent();
+                        target.roles.set([]);
+                        if (!(RankNumber > 0)) return [3 /*break*/, 7];
                         rRole = (_b = interaction.guild) === null || _b === void 0 ? void 0 : _b.roles.cache.find(function (r) { return r.name === rankName_1; });
                         console.log(rRole);
                         return [4 /*yield*/, target.roles.add("" + rRole)];
+                    case 6:
+                        _c.sent();
+                        _c.label = 7;
+                    case 7:
+                        if (!(RankNumber >= 200)) return [3 /*break*/, 14];
+                        return [4 /*yield*/, target.roles.add("" + process.env.SuperRank)];
                     case 8:
                         _c.sent();
-                        if (!(RankNumber >= 7 && RankNumber <= 70)) return [3 /*break*/, 10];
-                        return [4 /*yield*/, target.roles.add("" + process.env.LowRank)];
+                        return [4 /*yield*/, target.roles.add("" + process.env.Emergency)];
                     case 9:
                         _c.sent();
-                        return [3 /*break*/, 25];
+                        return [4 /*yield*/, target.roles.add("" + process.env.Support)];
                     case 10:
-                        if (!(RankNumber >= 75 && RankNumber <= 120)) return [3 /*break*/, 13];
-                        return [4 /*yield*/, target.roles.add("" + process.env.MiddleRank)];
+                        _c.sent();
+                        return [4 /*yield*/, target.roles.add("" + process.env.ServerAdministrator)];
                     case 11:
                         _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.EmergencyResponse)];
+                        if (!(RankNumber >= 220)) return [3 /*break*/, 13];
+                        return [4 /*yield*/, target.roles.add("857544805298602004")];
                     case 12:
                         _c.sent();
-                        return [3 /*break*/, 25];
-                    case 13:
-                        if (!(RankNumber >= 121 && RankNumber <= 140)) return [3 /*break*/, 19];
-                        return [4 /*yield*/, target.roles.add("" + process.env.HighRank)];
+                        _c.label = 13;
+                    case 13: return [3 /*break*/, 24];
                     case 14:
-                        _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.EmergencyResponse)];
+                        if (!(RankNumber >= 121)) return [3 /*break*/, 19];
+                        return [4 /*yield*/, target.roles.add("" + process.env.HR)];
                     case 15:
                         _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.SupportTeam)];
+                        return [4 /*yield*/, target.roles.add("" + process.env.Emergency)];
                     case 16:
                         _c.sent();
-                        if (!(RankNumber >= 130)) return [3 /*break*/, 18];
-                        return [4 /*yield*/, target.roles.add("" + process.env.ServerAdministrator)];
+                        return [4 /*yield*/, target.roles.add("" + process.env.Support)];
                     case 17:
                         _c.sent();
-                        _c.label = 18;
-                    case 18: return [3 /*break*/, 25];
+                        return [4 /*yield*/, target.roles.add("" + process.env.ServerAdministrator)];
+                    case 18:
+                        _c.sent();
+                        return [3 /*break*/, 24];
                     case 19:
-                        if (!(RankNumber >= 200 && RankNumber <= 255)) return [3 /*break*/, 25];
-                        return [4 /*yield*/, target.roles.add("" + process.env.SuperRank)];
+                        if (!(RankNumber >= 70)) return [3 /*break*/, 22];
+                        return [4 /*yield*/, target.roles.add("" + process.env.MR)];
                     case 20:
                         _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.EmergencyResponse)];
+                        return [4 /*yield*/, target.roles.add("" + process.env.Emergency)];
                     case 21:
                         _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.SupportTeam)];
+                        return [3 /*break*/, 24];
                     case 22:
-                        _c.sent();
-                        return [4 /*yield*/, target.roles.add("" + process.env.ServerAdministrator)];
+                        if (!(RankNumber >= 7)) return [3 /*break*/, 24];
+                        return [4 /*yield*/, target.roles.add("" + process.env.LR)];
                     case 23:
                         _c.sent();
-                        if (!(RankNumber >= 240)) return [3 /*break*/, 25];
-                        return [4 /*yield*/, target.roles.add("857544805298602004")];
-                    case 24:
-                        _c.sent();
-                        _c.label = 25;
-                    case 25: return [4 /*yield*/, target.roles.add("852583076910727228")];
-                    case 26:
+                        _c.label = 24;
+                    case 24: return [4 /*yield*/, target.roles.add("852583076910727228")];
+                    case 25:
                         _c.sent();
                         verifiedEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Verification Success**")
@@ -149,10 +145,10 @@ exports.default = {
                         return [4 /*yield*/, interaction.reply({
                                 embeds: [verifiedEmbed]
                             })];
-                    case 27:
+                    case 26:
                         _c.sent();
                         return [2 /*return*/];
-                    case 28:
+                    case 27:
                         error_1 = _c.sent();
                         ErrorEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Error Occurred**")
@@ -162,18 +158,18 @@ exports.default = {
                         return [4 /*yield*/, interaction.reply({
                                 embeds: [ErrorEmbed]
                             })];
-                    case 29:
+                    case 28:
                         _c.sent();
                         return [2 /*return*/];
-                    case 30: return [3 /*break*/, 32];
-                    case 31:
+                    case 29: return [3 /*break*/, 31];
+                    case 30:
                         noVerifyEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**No verification data found**")
                             .setDescription("Please ensure you are verified first.")
                             .setFooter("Cereza Moderation")
                             .setColor("RED");
                         return [2 /*return*/, noVerifyEmbed];
-                    case 32: return [2 /*return*/];
+                    case 31: return [2 /*return*/];
                 }
             });
         });

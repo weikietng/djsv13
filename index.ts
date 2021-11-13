@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 dotenv.config()
 
-const client = new DiscordJS.Client({
+const client = new DiscordJS.Client({ 
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,

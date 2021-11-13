@@ -9,12 +9,6 @@ export default {
     category: 'Verification',
     description: 'Reverify your account/switch your account.',
 
-    aliases: "switchroles",
-
-
-
-    maxArgs: 1,
-    expectedArgs: '[amount]',
 
     slash: true,
 
@@ -89,7 +83,37 @@ export default {
                                     memberItem.setNickname(rUsernamefromID)
                                     let rankName = await noblox.getRankNameInGroup(5206353, Number(data.robloxId))
                                     let RankNumber = await noblox.getRankInGroup(5206353, Number(data.robloxId))
-                                    // Verified Roles
+                                    memberItem.roles.set([])
+
+            
+                                    if (RankNumber>0){
+                                        let rRole = i.guild?.roles.cache.find(r => r.name === rankName)
+    
+                                        console.log(rRole)
+                                        await memberItem.roles.add(`${rRole}`)
+                                    }
+    
+                                    if(RankNumber >= 200){
+                                        await memberItem.roles.add(`${process.env.SuperRank}`)
+                                        await memberItem.roles.add(`${process.env.Emergency}`)
+                                        await memberItem.roles.add(`${process.env.Support}`)
+                                        await memberItem.roles.add(`${process.env.ServerAdministrator}`)
+                                        if(RankNumber >=220){
+                                            await memberItem.roles.add("857544805298602004")
+                                        }
+                                    }else if (RankNumber>=121){
+                                        await memberItem.roles.add(`${process.env.HR}`)
+                                        await memberItem.roles.add(`${process.env.Emergency}`)
+                                        await memberItem.roles.add(`${process.env.Support}`)
+                                        await memberItem.roles.add(`${process.env.ServerAdministrator}`)
+    
+                                    }else if (RankNumber>=70){
+                                        await memberItem.roles.add(`${process.env.MR}`)
+                                        await memberItem.roles.add(`${process.env.Emergency}`)
+                                    }else if(RankNumber>=7){
+                                        await memberItem.roles.add(`${process.env.LR}`)
+                                    }
+    
                                     await memberItem.roles.add("852583076910727228")
 
                                     const SuccessEmbed = new MessageEmbed()
