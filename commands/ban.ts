@@ -18,9 +18,7 @@ export default {
     expectedArgsTypes: ['USER', 'STRING'],
 
     callback: async({ message, interaction, args }) => {
-        const target = message
-            ? message.mentions.members?.first()
-            : (interaction.options.getMember('user') as GuildMember)
+        const target = interaction.options.getMember('user') as GuildMember
 
 
 
@@ -66,41 +64,7 @@ export default {
             return noReasonEmbed
 
         }
-        if (Message) {
-            let DMembed = new MessageEmbed()
-                .setTitle("**Cereza Moderation**")
-                .setDescription(`You have been banned from Cereza for ${reason}. \n \n Moderator: ${message.member?.displayName}`)
-                .setFooter("Cereza Moderation")
-                .setColor("ORANGE")
-
-            try {
-              await  target.send({ embeds: [DMembed] })
-
-            } catch (error) {
-                console.log(error)
-                interaction.channel?.send({
-                    embeds: [new MessageEmbed()
-                        .setTitle("Error DM'ing user")
-                        .setDescription("The user had their DM's set to private. \n However, I will proceed to ban them.")
-                        .setFooter("Cereza Modetaion")
-                        .setColor("YELLOW")
-                    ]
-                })
-
-            }
-
-
-            target.ban({ reason })
-
-            let KickEmbed = new MessageEmbed()
-                .setTitle("**Banned Succesfully**")
-                .setDescription(`${target.user.username} had been banned. \n \n **Reason: ** ${reason} \n **Moderator:** ${message.member?.displayName}`)
-                .setFooter("Cereza Moderation")
-                .setColor("DARK_PURPLE")
-
-            return KickEmbed
-
-        } else {
+        
             let DMembed = new MessageEmbed()
                 .setTitle("**Cereza Moderation**")
                 .setDescription(`You have been banned from Cereza for ${reason}. \n \n Moderator: ${interaction.user.username}`)
@@ -135,7 +99,7 @@ export default {
             return BanEmbed
 
 
-        }
+        
 
     },
 } as ICommand
