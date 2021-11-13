@@ -41,7 +41,7 @@ export default {
                 target.setNickname(rUsernamefromID)
                 let rankName = await noblox.getRankNameInGroup(5206353, Number(RobloxUserID))
                 let RankNumber = await noblox.getRankInGroup(5206353, Number(RobloxUserID))
-                target.roles.set([])
+                await target.roles.set([])
 
 
                 if (RankNumber > 0) {
@@ -49,6 +49,9 @@ export default {
 
                     console.log(rRole)
                     await target.roles.add(`${rRole}`)
+                    await target.roles.add("852583076910727228")
+                }else{
+                    await target.roles.add("852583076910727228")
                 }
 
                 if (RankNumber >= 200) {
@@ -72,7 +75,7 @@ export default {
                     await target.roles.add(`${process.env.LR}`)
                 }
 
-                await target.roles.add("852583076910727228")
+                
                 let verifiedEmbed = new MessageEmbed()
                     .setTitle("**Verification Success**")
                     .setDescription(`\n ${target.nickname}'s roles should be updated within the next few minutes.`)

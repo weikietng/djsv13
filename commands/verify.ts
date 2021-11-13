@@ -91,7 +91,7 @@ export default {
                                 let rankName = await noblox.getRankNameInGroup(5206353, Number(data.robloxId))
                                 let RankNumber = await noblox.getRankInGroup(5206353, Number(data.robloxId))
                                
-                                memberItem.roles.set([])
+                                await memberItem.roles.set([])
 
             
                                 if (RankNumber>0){
@@ -99,6 +99,9 @@ export default {
 
                                     console.log(rRole)
                                     await memberItem.roles.add(`${rRole}`)
+                                    await memberItem.roles.add("852583076910727228")
+                                }else{
+                                    await memberItem.roles.add("852583076910727228")
                                 }
 
                                 if(RankNumber >= 200){
@@ -122,7 +125,7 @@ export default {
                                     await memberItem.roles.add(`${process.env.LR}`)
                                 }
 
-                                await memberItem.roles.add("852583076910727228")
+                               
                                 let verifiedEmbed = new MessageEmbed()
                                     .setTitle("**Verification Success**")
                                     .setDescription("\n Your roles should be updated within the next few minutes.")

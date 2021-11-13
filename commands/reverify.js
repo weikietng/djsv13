@@ -82,11 +82,11 @@ exports.default = {
                             return __generator(this, function (_b) {
                                 switch (_b.label) {
                                     case 0:
-                                        if (!(i.user.id === msgInt.user.id)) return [3 /*break*/, 37];
-                                        if (!(i.customId === 'Reverification_Init')) return [3 /*break*/, 37];
+                                        if (!(i.user.id === msgInt.user.id)) return [3 /*break*/, 39];
+                                        if (!(i.customId === 'Reverification_Init')) return [3 /*break*/, 39];
                                         _b.label = 1;
                                     case 1:
-                                        _b.trys.push([1, 35, , 37]);
+                                        _b.trys.push([1, 37, , 39]);
                                         uri = "https://verify.eryn.io/api/user/" + msgInt.user.id;
                                         return [4 /*yield*/, axios_1.default.get(uri)];
                                     case 2:
@@ -121,7 +121,7 @@ exports.default = {
                                         _b.sent();
                                         _b.label = 7;
                                     case 7:
-                                        _b.trys.push([7, 32, , 34]);
+                                        _b.trys.push([7, 34, , 36]);
                                         memberItem = msgInt.member;
                                         memberItem.setNickname(rUsernamefromID);
                                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data.robloxId))];
@@ -130,80 +130,84 @@ exports.default = {
                                         return [4 /*yield*/, noblox_js_1.default.getRankInGroup(5206353, Number(data.robloxId))];
                                     case 9:
                                         RankNumber = _b.sent();
-                                        memberItem.roles.set([]);
-                                        return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
+                                        return [4 /*yield*/, memberItem.roles.set([])];
                                     case 10:
                                         _b.sent();
-                                        if (!(RankNumber > 0)) return [3 /*break*/, 12];
+                                        if (!(RankNumber > 0)) return [3 /*break*/, 13];
                                         rRole = (_a = i.guild) === null || _a === void 0 ? void 0 : _a.roles.cache.find(function (r) { return r.name === rankName_1; });
                                         console.log(rRole);
                                         return [4 /*yield*/, memberItem.roles.add("" + rRole)];
                                     case 11:
                                         _b.sent();
-                                        _b.label = 12;
+                                        return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
                                     case 12:
-                                        if (!(RankNumber >= 200)) return [3 /*break*/, 19];
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SuperRank)];
-                                    case 13:
                                         _b.sent();
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                        return [3 /*break*/, 15];
+                                    case 13: return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
                                     case 14:
                                         _b.sent();
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Support)];
+                                        _b.label = 15;
                                     case 15:
-                                        _b.sent();
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                        if (!(RankNumber >= 200)) return [3 /*break*/, 22];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.SuperRank)];
                                     case 16:
                                         _b.sent();
-                                        if (!(RankNumber >= 220)) return [3 /*break*/, 18];
-                                        return [4 /*yield*/, memberItem.roles.add("857544805298602004")];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
                                     case 17:
                                         _b.sent();
-                                        _b.label = 18;
-                                    case 18: return [3 /*break*/, 29];
-                                    case 19:
-                                        if (!(RankNumber >= 121)) return [3 /*break*/, 24];
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.HR)];
-                                    case 20:
-                                        _b.sent();
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
-                                    case 21:
-                                        _b.sent();
                                         return [4 /*yield*/, memberItem.roles.add("" + process.env.Support)];
-                                    case 22:
+                                    case 18:
                                         _b.sent();
                                         return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
+                                    case 19:
+                                        _b.sent();
+                                        if (!(RankNumber >= 220)) return [3 /*break*/, 21];
+                                        return [4 /*yield*/, memberItem.roles.add("857544805298602004")];
+                                    case 20:
+                                        _b.sent();
+                                        _b.label = 21;
+                                    case 21: return [3 /*break*/, 32];
+                                    case 22:
+                                        if (!(RankNumber >= 121)) return [3 /*break*/, 27];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.HR)];
                                     case 23:
                                         _b.sent();
-                                        return [3 /*break*/, 29];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
                                     case 24:
-                                        if (!(RankNumber >= 70)) return [3 /*break*/, 27];
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.MR)];
+                                        _b.sent();
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Support)];
                                     case 25:
                                         _b.sent();
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.ServerAdministrator)];
                                     case 26:
                                         _b.sent();
-                                        return [3 /*break*/, 29];
+                                        return [3 /*break*/, 32];
                                     case 27:
-                                        if (!(RankNumber >= 7)) return [3 /*break*/, 29];
-                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.LR)];
+                                        if (!(RankNumber >= 70)) return [3 /*break*/, 30];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.MR)];
                                     case 28:
                                         _b.sent();
-                                        _b.label = 29;
-                                    case 29: return [4 /*yield*/, memberItem.roles.add("852583076910727228")];
-                                    case 30:
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.Emergency)];
+                                    case 29:
                                         _b.sent();
+                                        return [3 /*break*/, 32];
+                                    case 30:
+                                        if (!(RankNumber >= 7)) return [3 /*break*/, 32];
+                                        return [4 /*yield*/, memberItem.roles.add("" + process.env.LR)];
+                                    case 31:
+                                        _b.sent();
+                                        _b.label = 32;
+                                    case 32:
                                         SuccessEmbed = new discord_js_1.MessageEmbed()
                                             .setTitle("**Reverification Success**")
                                             .setDescription("You are now reverified as **" + rUsernamefromID + "**!")
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Verification");
                                         return [4 /*yield*/, msgInt.editReply({ embeds: [SuccessEmbed], components: [] })];
-                                    case 31:
+                                    case 33:
                                         _b.sent();
                                         return [2 /*return*/];
-                                    case 32:
+                                    case 34:
                                         error_1 = _b.sent();
                                         ErrorEmbed = new discord_js_1.MessageEmbed()
                                             .setTitle("**Error Occurred**")
@@ -214,11 +218,11 @@ exports.default = {
                                                 embeds: [ErrorEmbed],
                                                 ephemeral: true
                                             })];
-                                    case 33:
+                                    case 35:
                                         _b.sent();
                                         return [2 /*return*/];
-                                    case 34: return [3 /*break*/, 37];
-                                    case 35:
+                                    case 36: return [3 /*break*/, 39];
+                                    case 37:
                                         err_1 = _b.sent();
                                         verifyRow = new discord_js_1.MessageActionRow()
                                             .addComponents(new discord_js_1.MessageButton()
@@ -235,10 +239,10 @@ exports.default = {
                                                 components: [verifyRow],
                                                 ephemeral: true
                                             })];
-                                    case 36:
+                                    case 38:
                                         _b.sent();
                                         return [2 /*return*/];
-                                    case 37: return [2 /*return*/];
+                                    case 39: return [2 /*return*/];
                                 }
                             });
                         }); });

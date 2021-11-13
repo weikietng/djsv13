@@ -83,14 +83,17 @@ export default {
                                     memberItem.setNickname(rUsernamefromID)
                                     let rankName = await noblox.getRankNameInGroup(5206353, Number(data.robloxId))
                                     let RankNumber = await noblox.getRankInGroup(5206353, Number(data.robloxId))
-                                    memberItem.roles.set([])
-                                    await memberItem.roles.add("852583076910727228")
+                                    await memberItem.roles.set([])
+                                    
             
                                     if (RankNumber>0){
                                         let rRole = i.guild?.roles.cache.find(r => r.name === rankName)
     
                                         console.log(rRole)
                                         await memberItem.roles.add(`${rRole}`)
+                                        await memberItem.roles.add("852583076910727228")
+                                    }else{
+                                        await memberItem.roles.add("852583076910727228")
                                     }
     
                                     if(RankNumber >= 200){
@@ -114,7 +117,7 @@ export default {
                                         await memberItem.roles.add(`${process.env.LR}`)
                                     }
     
-                                    await memberItem.roles.add("852583076910727228")
+                                
 
                                     const SuccessEmbed = new MessageEmbed()
                                         .setTitle("**Reverification Success**")
