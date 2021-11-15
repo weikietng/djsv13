@@ -44,10 +44,10 @@ export default {
 
             let MutedEmbed = new MessageEmbed()
                 .setTitle("Muted Succesfully")
-                .setDescription(`**${target.nickname}** had been muted. \n \n Reason: ${reason} \n Duration: ${duration}`)
+                .setDescription(`**${target.nickname}** had been muted. \n \n Reason: ${reason} \n Duration: ${duration} \n _Ignore the interaction failed message._`)
                 .setColor("PURPLE")
                 .setFooter("Cereza Moderation")
-            interaction.channel?.send({ embeds: [MutedEmbed] })
+            interaction.reply({ embeds: [MutedEmbed] })
 
 
             setTimeout(async () => {

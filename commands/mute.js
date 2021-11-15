@@ -53,11 +53,10 @@ exports.default = {
         var message = _a.message, interaction = _a.interaction, args = _a.args;
         return __awaiter(void 0, void 0, void 0, function () {
             var target_1, reason, duration, noTagEmbed, noReasonEmbed, MutedEmbed, err_1, errorEmbed;
-            var _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _c.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         target_1 = interaction.options.getMember('user');
                         reason = interaction.options.getString('reason');
                         duration = interaction.options.getString('duration') || "1h";
@@ -81,13 +80,13 @@ exports.default = {
                         }
                         return [4 /*yield*/, target_1.roles.add("861690102966648842")];
                     case 1:
-                        _c.sent();
+                        _b.sent();
                         MutedEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("Muted Succesfully")
-                            .setDescription("**" + target_1.nickname + "** had been muted. \n \n Reason: " + reason + " \n Duration: " + duration)
+                            .setDescription("**" + target_1.nickname + "** had been muted. \n \n Reason: " + reason + " \n Duration: " + duration + " \n _Ignore the interaction failed message._")
                             .setColor("PURPLE")
                             .setFooter("Cereza Moderation");
-                        (_b = interaction.channel) === null || _b === void 0 ? void 0 : _b.send({ embeds: [MutedEmbed] });
+                        interaction.reply({ embeds: [MutedEmbed] });
                         setTimeout(function () { return __awaiter(void 0, void 0, void 0, function () {
                             var unmutedEmbed;
                             var _a;
@@ -111,7 +110,7 @@ exports.default = {
                         }); }, (0, ms_1.default)(duration));
                         return [3 /*break*/, 3];
                     case 2:
-                        err_1 = _c.sent();
+                        err_1 = _b.sent();
                         errorEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("Error has occured")
                             .setDescription("Error: " + err_1)
