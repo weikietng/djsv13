@@ -66,7 +66,7 @@ exports.default = {
                     member.roles.add(id);
                 }
                 interaction.reply({
-                    content: 'Roles update!',
+                    content: 'Roles updated!',
                     ephemeral: true,
                 });
             }
