@@ -10,7 +10,7 @@ export default {
 
     slash: true,
 
-    init: async(client: Client) => {
+    init: (client: Client) => {
       client.on('interactionCreate', async(interaction) => {
         if (!interaction.isButton()) {
           return
