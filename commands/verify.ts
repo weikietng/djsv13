@@ -142,7 +142,7 @@ export default {
 
                     
                     interaction.reply({
-                        content: `You are already verified. Use /getroles to update your data instead.`,
+                        content: ` (Will be fixed) You are already verified. Use /getroles to update your data instead.`,
                         ephemeral: true
                     })
 
