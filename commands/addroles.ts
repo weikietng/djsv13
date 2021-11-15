@@ -45,7 +45,7 @@ import {
           }
   
           interaction.reply({
-            content: 'Roles update!',
+            content: 'Roles updated!',
             ephemeral: true,
           })
         }

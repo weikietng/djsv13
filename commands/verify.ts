@@ -134,17 +134,14 @@ export default {
 
 
                     } else {
-
-
-
-
+                        return interaction.reply({
+                            content: ` (Will be fixed) You are already verified. Use /getroles to update your data instead.`,
+                            ephemeral: true
+                        })
                     }
 
                     
-                    interaction.reply({
-                        content: ` (Will be fixed) You are already verified. Use /getroles to update your data instead.`,
-                        ephemeral: true
-                    })
+ 
 
                 }
 
@@ -175,10 +172,6 @@ export default {
                 return
             }
   
-          interaction.reply({
-            content: 'Roles update!',
-            ephemeral: true,
-          })
         }
       })
     },
