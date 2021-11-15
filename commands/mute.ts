@@ -60,12 +60,12 @@ export default {
                             .setColor("DARK_GREEN")
                             .setFooter("Cereza Moderation")
                         interaction.channel?.send({ embeds: [unmutedEmbed] })
-                        return
+                        
                     }
                 }
 
             }, ms(duration))
-            return
+            
         } catch (err) {
             let errorEmbed = new MessageEmbed()
                 .setTitle("Error has occured")
@@ -76,9 +76,6 @@ export default {
 
         }
 
-
-
-        return
 
     },
 

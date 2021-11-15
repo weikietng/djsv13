@@ -105,12 +105,12 @@ exports.default = {
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Moderation");
                                         (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] });
-                                        return [2 /*return*/];
+                                        _b.label = 2;
                                     case 2: return [2 /*return*/];
                                 }
                             });
                         }); }, (0, ms_1.default)(duration));
-                        return [2 /*return*/];
+                        return [3 /*break*/, 3];
                     case 2:
                         err_1 = _c.sent();
                         errorEmbed = new discord_js_1.MessageEmbed()
