@@ -184,7 +184,8 @@ export default {
                                 .setColor("GREEN")
             
                             await interaction.reply({
-                                embeds: [verifiedEmbed]
+                                embeds: [verifiedEmbed],
+                                ephemeral: true
                             })
                             return
             
@@ -196,7 +197,8 @@ export default {
                                 .setColor("RED")
                                 .setFooter("Cereza Verification")
                             await interaction.reply({
-                                embeds: [ErrorEmbed]
+                                embeds: [ErrorEmbed],
+                                ephemeral: true
                             })
                             return
             

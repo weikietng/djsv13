@@ -302,7 +302,8 @@ exports.default = {
                                 .setFooter("Cereza Verification")
                                 .setColor("GREEN");
                             return [4 /*yield*/, interaction.reply({
-                                    embeds: [verifiedEmbed]
+                                    embeds: [verifiedEmbed],
+                                    ephemeral: true
                                 })];
                         case 66:
                             _c.sent();
@@ -315,7 +316,8 @@ exports.default = {
                                 .setColor("RED")
                                 .setFooter("Cereza Verification");
                             return [4 /*yield*/, interaction.reply({
-                                    embeds: [ErrorEmbed]
+                                    embeds: [ErrorEmbed],
+                                    ephemeral: true
                                 })];
                         case 68:
                             _c.sent();
