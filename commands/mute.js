@@ -93,7 +93,7 @@ exports.default = {
                             return __generator(this, function (_b) {
                                 switch (_b.label) {
                                     case 0:
-                                        if (!target_1) return [3 /*break*/, 2];
+                                        if (!target_1) return [3 /*break*/, 3];
                                         if (!target_1.roles.cache.has("861690102966648842")) return [3 /*break*/, 2];
                                         return [4 /*yield*/, target_1.roles.remove("861690102966648842")];
                                     case 1:
@@ -104,7 +104,10 @@ exports.default = {
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Moderation");
                                         return [2 /*return*/, (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] })];
-                                    case 2: return [2 /*return*/];
+                                    case 2:
+                                        console.log("No roles lol");
+                                        _b.label = 3;
+                                    case 3: return [2 /*return*/];
                                 }
                             });
                         }); }, (0, ms_1.default)(duration));

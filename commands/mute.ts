@@ -61,7 +61,7 @@ export default {
                             .setFooter("Cereza Moderation")
                       return interaction.channel?.send({ embeds: [unmutedEmbed] })
                         
-                    }
+                    }else{console.log("No roles lol")}
                 }
 
             }, ms(duration))
