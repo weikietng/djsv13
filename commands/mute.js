@@ -84,34 +84,32 @@ exports.default = {
                         _c.sent();
                         MutedEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("Muted Succesfully")
-                            .setDescription("**" + target_1.nickname + "** had been muted. \n \n Reason: " + reason + " Duration: " + duration)
+                            .setDescription("**" + target_1.nickname + "** had been muted. \n \n Reason: " + reason + " \n Duration: " + duration)
                             .setColor("PURPLE")
                             .setFooter("Cereza Moderation");
                         (_b = interaction.channel) === null || _b === void 0 ? void 0 : _b.send({ embeds: [MutedEmbed] });
-                        if (duration) {
-                            setTimeout(function () { return __awaiter(void 0, void 0, void 0, function () {
-                                var unmutedEmbed;
-                                var _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!target_1) return [3 /*break*/, 2];
-                                            if (!target_1.roles.cache.has("861690102966648842")) return [3 /*break*/, 2];
-                                            return [4 /*yield*/, target_1.roles.remove("861690102966648842")];
-                                        case 1:
-                                            _b.sent();
-                                            unmutedEmbed = new discord_js_1.MessageEmbed()
-                                                .setTitle("System Notification")
-                                                .setDescription(target_1.nickname + " has been unmuted automatically")
-                                                .setColor("DARK_GREEN")
-                                                .setFooter("Cereza Moderation");
-                                            (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] });
-                                            _b.label = 2;
-                                        case 2: return [2 /*return*/];
-                                    }
-                                });
-                            }); }, (0, ms_1.default)(duration));
-                        }
+                        setTimeout(function () { return __awaiter(void 0, void 0, void 0, function () {
+                            var unmutedEmbed;
+                            var _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
+                                    case 0:
+                                        if (!target_1) return [3 /*break*/, 2];
+                                        if (!target_1.roles.cache.has("861690102966648842")) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, target_1.roles.remove("861690102966648842")];
+                                    case 1:
+                                        _b.sent();
+                                        unmutedEmbed = new discord_js_1.MessageEmbed()
+                                            .setTitle("System Notification")
+                                            .setDescription(target_1.nickname + " has been unmuted automatically")
+                                            .setColor("DARK_GREEN")
+                                            .setFooter("Cereza Moderation");
+                                        (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] });
+                                        return [2 /*return*/];
+                                    case 2: return [2 /*return*/];
+                                }
+                            });
+                        }); }, (0, ms_1.default)(duration));
                         return [2 /*return*/];
                     case 2:
                         err_1 = _c.sent();
