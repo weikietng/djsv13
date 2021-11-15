@@ -59,7 +59,7 @@ export default {
                             .setDescription(`${target.nickname} has been unmuted automatically`)
                             .setColor("DARK_GREEN")
                             .setFooter("Cereza Moderation")
-                        interaction.channel?.send({ embeds: [unmutedEmbed] })
+                      return interaction.channel?.send({ embeds: [unmutedEmbed] })
                         
                     }
                 }
@@ -72,7 +72,7 @@ export default {
                 .setDescription(`Error: ${err}`)
                 .setColor("ORANGE")
                 .setFooter("Cereza Error Handler")
-            interaction.reply({ embeds: [errorEmbed], ephemeral: true })
+          return  interaction.reply({ embeds: [errorEmbed], ephemeral: true })
 
         }
 

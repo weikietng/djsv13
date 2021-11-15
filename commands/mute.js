@@ -104,8 +104,7 @@ exports.default = {
                                             .setDescription(target_1.nickname + " has been unmuted automatically")
                                             .setColor("DARK_GREEN")
                                             .setFooter("Cereza Moderation");
-                                        (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] });
-                                        _b.label = 2;
+                                        return [2 /*return*/, (_a = interaction.channel) === null || _a === void 0 ? void 0 : _a.send({ embeds: [unmutedEmbed] })];
                                     case 2: return [2 /*return*/];
                                 }
                             });
@@ -118,8 +117,7 @@ exports.default = {
                             .setDescription("Error: " + err_1)
                             .setColor("ORANGE")
                             .setFooter("Cereza Error Handler");
-                        interaction.reply({ embeds: [errorEmbed], ephemeral: true });
-                        return [3 /*break*/, 3];
+                        return [2 /*return*/, interaction.reply({ embeds: [errorEmbed], ephemeral: true })];
                     case 3: return [2 /*return*/];
                 }
             });
