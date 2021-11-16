@@ -38,7 +38,11 @@ export default {
 
         let cashdata = await cash.findOne({RobloxUserID: `${verificationData.RobloxUserID}`})
         let bandata = await bans.findOne({RobloxUserID: `${verificationData.RobloxUserID}`})
-        let plrCash = cashdata.Cash || 0
+        let plrCash = 0
+        if (cashdata){
+          plrCash = cashdata.Cash 
+        }
+        
         let banMessage = `\n \n **__Ban Information__** \n Status: Not banned`
         if (bandata){
           banMessage = `\n \n **__Ban Information__** \n Status: Banned \n Reason: ${bandata.Reason} \n Moderator: ${bandata.Moderator}`

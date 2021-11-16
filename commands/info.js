@@ -86,7 +86,10 @@ exports.default = {
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + verificationData.RobloxUserID })];
                     case 7:
                         bandata = _c.sent();
-                        plrCash = cashdata.Cash || 0;
+                        plrCash = 0;
+                        if (cashdata) {
+                            plrCash = cashdata.Cash;
+                        }
                         banMessage = "\n \n **__Ban Information__** \n Status: Not banned";
                         if (bandata) {
                             banMessage = "\n \n **__Ban Information__** \n Status: Banned \n Reason: " + bandata.Reason + " \n Moderator: " + bandata.Moderator;
