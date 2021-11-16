@@ -1,366 +1,76 @@
-import { GuildMember } from "discord.js";
+import { GuildMember, PartialTextBasedChannel } from "discord.js";
 import { ICommand } from "wokcommands";
 import mongoose from "mongoose";
 import noblox from "noblox.js";
 
-import verifiation from "../models/account";
+import verification from "../models/account";
 import cash from "../models/cash";
 import bans from "../models/gamebans";
 import { MessageEmbed } from "discord.js";
 
-let devMode = true;
+
 
 
 export default {
   category: 'Utility',
   description: "Return with the user's profile",
-  slash: "both",
+  slash: true,
 
-  options: [{
-    name: "user",
-    description: "Get the profile for the mentioned user",
-    required: false,
-    type: 9
-
-  }],
+  expectedArgs: '[user]',
+  expectedArgsTypes: ['USER'],
 
   callback: async ({ message, args, interaction }) => {
+    let LoadingEmbed = new MessageEmbed()
+    .setTitle("Fetching profile......")
+    .setColor("YELLOW")
+    .setFooter("Cereza Core V2")
+    interaction.reply({embeds:[LoadingEmbed]})
     
-    if (message) {
-      const target = message.mentions.members?.first()
-      console.log("Message Command")
-      if(!target){
-        let data1 = await verifiation.findOne({ DiscordID: `${message.author.id}` })
+    const target = interaction.options.getMember('user') as GuildMember || interaction.member as GuildMember
+    try {
 
-      if (data1) {
-        let username = await noblox.getUsernameFromId(data1.RobloxUserID)
-        let rank = await noblox.getRankNameInGroup(5206353, Number(data1.RobloxUserID))
-        let avatar = await noblox.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")
+      let verificationData = await verification.findOne({ DiscordID: `${target.id}` })
+      if (verificationData) {
+        let username = await noblox.getUsernameFromId(verificationData.RobloxUserID)
+        let rank = await noblox.getRankNameInGroup(5206353, Number(verificationData.RobloxUserID))
+        let avatar = await noblox.getPlayerThumbnail(Number(verificationData.RobloxUserID),"150x150")
 
-        const embed = new MessageEmbed()
-        let cashdata = await cash.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-        if (cashdata) {
-          let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-          
-
-          if (bandata){
-            const embed1 = new MessageEmbed()
-            .setTitle("__Profile__")
-            .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-            .setFooter("Cereza Profile")
-            .setThumbnail(`${avatar[0].imageUrl}`)
-            .setColor("BLUE")
-
-            message.reply({embeds: [embed1]})
-
-          }else{
-            const embed2 = new MessageEmbed()
-            .setTitle("__Profile__")
-            .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-            .setFooter("Cereza Profile")
-            .setThumbnail(`${avatar[0].imageUrl}`)
-            .setColor("BLUE")
-            
-            message.reply({embeds: [embed2]})
-
-
-          }
-            
-
-          
-
-        } else {
-          let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-          if (bandata){
-            const embed1 = new MessageEmbed()
-            .setTitle("__Profile__")
-            .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-            .setFooter("Cereza Profile")
-            .setThumbnail(`${avatar[0].imageUrl}`)
-            .setColor("BLUE")
-
-            message.reply({embeds: [embed1]})
-
-          }else{
-            const embed2 = new MessageEmbed()
-            .setTitle("__Profile__")
-            .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-            .setFooter("Cereza Profile")
-            .setThumbnail(`${avatar[0].imageUrl}`)
-            .setColor("BLUE")
-            
-            message.reply({embeds: [embed2]})
-
-
-          }
-
+        let cashdata = await cash.findOne({RobloxUserID: `${verificationData.RobloxUserID}`})
+        let bandata = await bans.findOne({RobloxUserID: `${verificationData.RobloxUserID}`})
+        let plrCash = cashdata.Cash || 0
+        let banMessage = `\n \n **__Ban Information__** \n Status: Not banned`
+        if (bandata){
+          banMessage = `\n \n **__Ban Information__** \n Status: Banned \n Reason: ${bandata.Reason} \n Moderator: ${bandata.Moderator}`
+          return banMessage
         }
-
+        let replyEmbed = new MessageEmbed()
+        .setTitle("__**Profile**__")
+        .setDescription(`Here's the profile. \n \n **Username: **${username} \n **Group Rank: **${rank} \n **Cash: **${plrCash}` + banMessage)
+        .setThumbnail(`${avatar[0].imageUrl}`)
+        .setColor("#ffbb8a")
+        .setFooter("Cereza Core V2")
+        interaction.editReply({embeds:[replyEmbed]})
       } else {
-        const embedNodata = new MessageEmbed()
-          .setTitle("__No Data Found__")
-          .setDescription("\n Please ensure that you are verified.")
-          .setFooter("Cereza Profile")
-          .setColor("RED")
-
-          message.reply({embeds: [embedNodata]})
+        let NotVerified = new MessageEmbed()
+        .setTitle("No profile found")
+        .setDescription("You or the user you mentioned is not verified with Cereza System yet.")
+        .setColor("RED")
+        .setFooter("Cereza Core V2")
+        interaction.reply({embeds:[NotVerified]})
       }
 
-      }else{
-        let data1 = await verifiation.findOne({ DiscordID: `${target.id}` })
+    } catch (err) {
+      let ErrorEmbed = new MessageEmbed()
+      .setTitle("Error Occurred")
+      .setDescription(`${err}`)
+      .setColor("RED")
+      .setFooter("Cereza Error Handler")
 
-        if (data1) {
-          let username = await noblox.getUsernameFromId(data1.RobloxUserID)
-          let rank = await noblox.getRankNameInGroup(5206353, Number(data1.RobloxUserID))
-          let avatar = await noblox.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")
-  
-          const embed = new MessageEmbed()
-          let cashdata = await cash.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-          if (cashdata) {
-            let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-            
-  
-            if (bandata){
-              const embed1 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-  
-              message.reply({embeds: [embed1]})
-  
-            }else{
-              const embed2 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-              
-              message.reply({embeds: [embed2]})
-  
-  
-            }
-              
-  
-            
-  
-          } else {
-            let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-            if (bandata){
-              const embed1 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-  
-              message.reply({embeds: [embed1]})
-  
-            }else{
-              const embed2 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-              
-              message.reply({embeds: [embed2]})
-  
-  
-            }
-  
-          }
-  
-        } else {
-          const embedNodata = new MessageEmbed()
-            .setTitle("__No Data Found__")
-            .setDescription("\n Please ensure that the target is verified.")
-            .setFooter("Cereza Profile")
-            .setColor("RED")
-  
-            message.reply({embeds: [embedNodata]})
-        }
-      }
-      
-    }
-    if (interaction) {
-      
-      if(devMode == true){
-        interaction.reply({embeds: 
-          [new MessageEmbed()
-            .setTitle("Slash disabled")
-            .setDescription("Slash is disabled for this for now.")
-            .setFooter("Cereza System")
-            .setColor("YELLOW")
-        ]})
-
-      }else if(devMode ==false){
-        let target = interaction.options.getMentionable('user') as GuildMember;
-        if(!target){
-          let data1 = await verifiation.findOne({ DiscordID: `${interaction.user.id}` })
-  
-        if (data1) {
-          let username = await noblox.getUsernameFromId(data1.RobloxUserID)
-          let rank = await noblox.getRankNameInGroup(5206353, Number(data1.RobloxUserID))
-          let avatar = await noblox.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")
-  
-          const embed = new MessageEmbed()
-          let cashdata = await cash.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-          if (cashdata) {
-            let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-            
-  
-            if (bandata){
-              const embed1 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-  
-              interaction.reply({embeds: [embed1]})
-  
-            }else{
-              const embed2 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-              
-              interaction.reply({embeds: [embed2]})
-  
-  
-            }
-              
-  
-            
-  
-          } else {
-            let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-            if (bandata){
-              const embed1 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-  
-              interaction.reply({embeds: [embed1]})
-  
-            }else{
-              const embed2 = new MessageEmbed()
-              .setTitle("__Profile__")
-              .setDescription(`Here's your profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-              .setFooter("Cereza Profile")
-              .setThumbnail(`${avatar[0].imageUrl}`)
-              .setColor("BLUE")
-              
-              interaction.reply({embeds: [embed2]})
-  
-  
-            }
-  
-          }
-  
-        } else {
-          const embedNodata = new MessageEmbed()
-            .setTitle("__No Data Found__")
-            .setDescription("\n Please ensure that you are verified.")
-            .setFooter("Cereza Profile")
-            .setColor("RED")
-  
-            interaction.reply({embeds: [embedNodata]})
-        }
-  
-        }else if (target){
-          const targetmember = target.id;
-          console.log(target.id)
-          let data1 = await verifiation.findOne({ DiscordID: `${targetmember}`})
-  
-          if (data1) {
-            let username = await noblox.getUsernameFromId(data1.RobloxUserID)
-            let rank = await noblox.getRankNameInGroup(5206353, Number(data1.RobloxUserID))
-            let avatar = await noblox.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")
-    
-            const embed = new MessageEmbed()
-            let cashdata = await cash.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-            if (cashdata) {
-              let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-              
-    
-              if (bandata){
-                const embed1 = new MessageEmbed()
-                .setTitle("__Profile__")
-                .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-                .setFooter("Cereza Profile")
-                .setThumbnail(`${avatar[0].imageUrl}`)
-                .setColor("BLUE")
-    
-                interaction.reply({embeds: [embed1]})
-    
-              }else{
-                const embed2 = new MessageEmbed()
-                .setTitle("__Profile__")
-                .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: **${cashdata.Cash} \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-                .setFooter("Cereza Profile")
-                .setThumbnail(`${avatar[0].imageUrl}`)
-                .setColor("BLUE")
-                
-                interaction.reply({embeds: [embed2]})
-    
-    
-              }
-                
-    
-              
-    
-            } else {
-              let bandata = await bans.findOne({ RobloxUserID: `${Number(data1.RobloxUserID)}` })
-              if (bandata){
-                const embed1 = new MessageEmbed()
-                .setTitle("__Profile__")
-                .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **${bandata.Reason}\n**Moderator: **${bandata.Moderator}`)
-                .setFooter("Cereza Profile")
-                .setThumbnail(`${avatar[0].imageUrl}`)
-                .setColor("BLUE")
-    
-                interaction.reply({embeds: [embed1]})
-    
-              }else{
-                const embed2 = new MessageEmbed()
-                .setTitle("__Profile__")
-                .setDescription(`Here's the mentioned user's profile. \n \n **Username:** ${username} \n **User ID: **${data1.RobloxUserID} \n **Rank: **${rank} \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.`)
-                .setFooter("Cereza Profile")
-                .setThumbnail(`${avatar[0].imageUrl}`)
-                .setColor("BLUE")
-                
-                interaction.reply({embeds:[embed2]})
-    
-    
-              }
-    
-            }
-    
-          } else {
-            const embedNodata = new MessageEmbed()
-              .setTitle("__No Data Found__")
-              .setDescription("\n Please ensure that the target is verified.")
-              .setFooter("Cereza Profile")
-              .setColor("RED")
-    
-              interaction.reply({embeds: [embedNodata]})
-          }
-        }
-
-      }
-
-      
-
+      interaction.reply({embeds:[ErrorEmbed]})
 
     }
+
+
 
 
   }

@@ -44,334 +44,80 @@ var account_1 = __importDefault(require("../models/account"));
 var cash_1 = __importDefault(require("../models/cash"));
 var gamebans_1 = __importDefault(require("../models/gamebans"));
 var discord_js_1 = require("discord.js");
-var devMode = true;
 exports.default = {
     category: 'Utility',
     description: "Return with the user's profile",
-    slash: "both",
-    options: [{
-            name: "user",
-            description: "Get the profile for the mentioned user",
-            required: false,
-            type: 9
-        }],
+    slash: true,
+    expectedArgs: '[user]',
+    expectedArgsTypes: ['USER'],
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, target, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata, targetmember, data1, username, rank, avatar, embed, cashdata, bandata, embed1, embed2, bandata, embed1, embed2, embedNodata;
-            var _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var LoadingEmbed, target, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        if (!message) return [3 /*break*/, 23];
-                        target = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first();
-                        console.log("Message Command");
-                        if (!!target) return [3 /*break*/, 12];
-                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + message.author.id })];
+                        LoadingEmbed = new discord_js_1.MessageEmbed()
+                            .setTitle("Fetching profile......")
+                            .setColor("YELLOW")
+                            .setFooter("Cereza Core V2");
+                        interaction.reply({ embeds: [LoadingEmbed] });
+                        target = interaction.options.getMember('user') || interaction.member;
+                        _b.label = 1;
                     case 1:
-                        data1 = _c.sent();
-                        if (!data1) return [3 /*break*/, 10];
-                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
+                        _b.trys.push([1, 10, , 11]);
+                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 2:
-                        username = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
+                        verificationData = _b.sent();
+                        if (!verificationData) return [3 /*break*/, 8];
+                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(verificationData.RobloxUserID)];
                     case 3:
-                        rank = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
+                        username = _b.sent();
+                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(verificationData.RobloxUserID))];
                     case 4:
-                        avatar = _c.sent();
-                        embed = new discord_js_1.MessageEmbed();
-                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
+                        rank = _b.sent();
+                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(verificationData.RobloxUserID), "150x150")];
                     case 5:
-                        cashdata = _c.sent();
-                        if (!cashdata) return [3 /*break*/, 7];
-                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
+                        avatar = _b.sent();
+                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + verificationData.RobloxUserID })];
                     case 6:
-                        bandata = _c.sent();
+                        cashdata = _b.sent();
+                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + verificationData.RobloxUserID })];
+                    case 7:
+                        bandata = _b.sent();
+                        plrCash = cashdata.Cash || 0;
+                        banMessage = "\n \n **__Ban Information__** \n Status: Not banned";
                         if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
+                            banMessage = "\n \n **__Ban Information__** \n Status: Banned \n Reason: " + bandata.Reason + " \n Moderator: " + bandata.Moderator;
+                            return [2 /*return*/, banMessage];
                         }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
-                        }
+                        replyEmbed = new discord_js_1.MessageEmbed()
+                            .setTitle("__**Profile**__")
+                            .setDescription("Here's the profile. \n \n **Username: **" + username + " \n **Group Rank: **" + rank + " \n **Cash: **" + plrCash + banMessage)
+                            .setThumbnail("" + avatar[0].imageUrl)
+                            .setColor("#ffbb8a")
+                            .setFooter("Cereza Core V2");
+                        interaction.editReply({ embeds: [replyEmbed] });
                         return [3 /*break*/, 9];
-                    case 7: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
                     case 8:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
-                        }
-                        _c.label = 9;
+                        NotVerified = new discord_js_1.MessageEmbed()
+                            .setTitle("No profile found")
+                            .setDescription("You or the user you mentioned is not verified with Cereza System yet.")
+                            .setColor("RED")
+                            .setFooter("Cereza Core V2");
+                        interaction.reply({ embeds: [NotVerified] });
+                        _b.label = 9;
                     case 9: return [3 /*break*/, 11];
                     case 10:
-                        embedNodata = new discord_js_1.MessageEmbed()
-                            .setTitle("__No Data Found__")
-                            .setDescription("\n Please ensure that you are verified.")
-                            .setFooter("Cereza Profile")
-                            .setColor("RED");
-                        message.reply({ embeds: [embedNodata] });
-                        _c.label = 11;
-                    case 11: return [3 /*break*/, 23];
-                    case 12: return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
-                    case 13:
-                        data1 = _c.sent();
-                        if (!data1) return [3 /*break*/, 22];
-                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
-                    case 14:
-                        username = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
-                    case 15:
-                        rank = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
-                    case 16:
-                        avatar = _c.sent();
-                        embed = new discord_js_1.MessageEmbed();
-                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 17:
-                        cashdata = _c.sent();
-                        if (!cashdata) return [3 /*break*/, 19];
-                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 18:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
-                        }
-                        return [3 /*break*/, 21];
-                    case 19: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 20:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            message.reply({ embeds: [embed2] });
-                        }
-                        _c.label = 21;
-                    case 21: return [3 /*break*/, 23];
-                    case 22:
-                        embedNodata = new discord_js_1.MessageEmbed()
-                            .setTitle("__No Data Found__")
-                            .setDescription("\n Please ensure that the target is verified.")
-                            .setFooter("Cereza Profile")
-                            .setColor("RED");
-                        message.reply({ embeds: [embedNodata] });
-                        _c.label = 23;
-                    case 23:
-                        if (!interaction) return [3 /*break*/, 47];
-                        if (!(devMode == true)) return [3 /*break*/, 24];
-                        interaction.reply({ embeds: [new discord_js_1.MessageEmbed()
-                                    .setTitle("Slash disabled")
-                                    .setDescription("Slash is disabled for this for now.")
-                                    .setFooter("Cereza System")
-                                    .setColor("YELLOW")
-                            ] });
-                        return [3 /*break*/, 47];
-                    case 24:
-                        if (!(devMode == false)) return [3 /*break*/, 47];
-                        target = interaction.options.getMentionable('user');
-                        if (!!target) return [3 /*break*/, 36];
-                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + interaction.user.id })];
-                    case 25:
-                        data1 = _c.sent();
-                        if (!data1) return [3 /*break*/, 34];
-                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
-                    case 26:
-                        username = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
-                    case 27:
-                        rank = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
-                    case 28:
-                        avatar = _c.sent();
-                        embed = new discord_js_1.MessageEmbed();
-                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 29:
-                        cashdata = _c.sent();
-                        if (!cashdata) return [3 /*break*/, 31];
-                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 30:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed2] });
-                        }
-                        return [3 /*break*/, 33];
-                    case 31: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 32:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's your profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed2] });
-                        }
-                        _c.label = 33;
-                    case 33: return [3 /*break*/, 35];
-                    case 34:
-                        embedNodata = new discord_js_1.MessageEmbed()
-                            .setTitle("__No Data Found__")
-                            .setDescription("\n Please ensure that you are verified.")
-                            .setFooter("Cereza Profile")
-                            .setColor("RED");
-                        interaction.reply({ embeds: [embedNodata] });
-                        _c.label = 35;
-                    case 35: return [3 /*break*/, 47];
-                    case 36:
-                        if (!target) return [3 /*break*/, 47];
-                        targetmember = target.id;
-                        console.log(target.id);
-                        return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + targetmember })];
-                    case 37:
-                        data1 = _c.sent();
-                        if (!data1) return [3 /*break*/, 46];
-                        return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(data1.RobloxUserID)];
-                    case 38:
-                        username = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(data1.RobloxUserID))];
-                    case 39:
-                        rank = _c.sent();
-                        return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(data1.RobloxUserID), "100x100")];
-                    case 40:
-                        avatar = _c.sent();
-                        embed = new discord_js_1.MessageEmbed();
-                        return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 41:
-                        cashdata = _c.sent();
-                        if (!cashdata) return [3 /*break*/, 43];
-                        return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 42:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: **" + cashdata.Cash + " \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed2] });
-                        }
-                        return [3 /*break*/, 45];
-                    case 43: return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + Number(data1.RobloxUserID) })];
-                    case 44:
-                        bandata = _c.sent();
-                        if (bandata) {
-                            embed1 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** Banned \n **Reason: **" + bandata.Reason + "\n**Moderator: **" + bandata.Moderator)
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed1] });
-                        }
-                        else {
-                            embed2 = new discord_js_1.MessageEmbed()
-                                .setTitle("__Profile__")
-                                .setDescription("Here's the mentioned user's profile. \n \n **Username:** " + username + " \n **User ID: **" + data1.RobloxUserID + " \n **Rank: **" + rank + " \n **Cash: ** 0 \n \n __**Ban Information**__\n **Status: ** No ban data found.")
-                                .setFooter("Cereza Profile")
-                                .setThumbnail("" + avatar[0].imageUrl)
-                                .setColor("BLUE");
-                            interaction.reply({ embeds: [embed2] });
-                        }
-                        _c.label = 45;
-                    case 45: return [3 /*break*/, 47];
-                    case 46:
-                        embedNodata = new discord_js_1.MessageEmbed()
-                            .setTitle("__No Data Found__")
-                            .setDescription("\n Please ensure that the target is verified.")
-                            .setFooter("Cereza Profile")
-                            .setColor("RED");
-                        interaction.reply({ embeds: [embedNodata] });
-                        _c.label = 47;
-                    case 47: return [2 /*return*/];
+                        err_1 = _b.sent();
+                        ErrorEmbed = new discord_js_1.MessageEmbed()
+                            .setTitle("Error Occurred")
+                            .setDescription("" + err_1)
+                            .setColor("RED")
+                            .setFooter("Cereza Error Handler");
+                        interaction.reply({ embeds: [ErrorEmbed] });
+                        return [3 /*break*/, 11];
+                    case 11: return [2 /*return*/];
                 }
             });
         });
