@@ -84,7 +84,7 @@ exports.default = {
                         banMessage = "\n \n **__Ban Information__** \n Status: Not banned";
                         if (bandata) {
                             banMessage = "\n \n **__Ban Information__** \n Status: Banned \n Reason: " + bandata.Reason + " \n Moderator: " + bandata.Moderator;
-                            return [2 /*return*/, banMessage];
+                            banMessage;
                         }
                         replyEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("__**Profile**__")

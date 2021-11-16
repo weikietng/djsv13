@@ -37,7 +37,7 @@ export default {
         let banMessage = `\n \n **__Ban Information__** \n Status: Not banned`
         if (bandata){
           banMessage = `\n \n **__Ban Information__** \n Status: Banned \n Reason: ${bandata.Reason} \n Moderator: ${bandata.Moderator}`
-          return banMessage
+          banMessage
         }
         let replyEmbed = new MessageEmbed()
         .setTitle("__**Profile**__")
