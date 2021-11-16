@@ -51,7 +51,7 @@ exports.default = {
     expectedArgs: '[user]',
     expectedArgsTypes: ['USER'],
     callback: function (_a) {
-        var message = _a.message, args = _a.args, interaction = _a.interaction;
+        var interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
             var target, loadingEmbed, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
             return __generator(this, function (_b) {

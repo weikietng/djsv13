@@ -1,6 +1,5 @@
 import { GuildMember, PartialTextBasedChannel } from "discord.js";
 import { ICommand } from "wokcommands";
-import mongoose from "mongoose";
 import noblox from "noblox.js";
 
 import verification from "../models/account";
@@ -19,7 +18,7 @@ export default {
   expectedArgs: '[user]',
   expectedArgsTypes: ['USER'],
 
-  callback: async ({ message, args, interaction }) => {
+  callback: async ({interaction }) => {
 
     
     const target = interaction.options.getMember('user') as GuildMember || interaction.member as GuildMember
