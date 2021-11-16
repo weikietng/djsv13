@@ -53,15 +53,10 @@ exports.default = {
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
-            var LoadingEmbed, target, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
+            var target, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        LoadingEmbed = new discord_js_1.MessageEmbed()
-                            .setTitle("Fetching profile......")
-                            .setColor("YELLOW")
-                            .setFooter("Cereza Core V2");
-                        interaction.reply({ embeds: [LoadingEmbed] });
                         target = interaction.options.getMember('user') || interaction.member;
                         _b.label = 1;
                     case 1:
@@ -105,7 +100,7 @@ exports.default = {
                             .setDescription("You or the user you mentioned is not verified with Cereza System yet.")
                             .setColor("RED")
                             .setFooter("Cereza Core V2");
-                        interaction.reply({ embeds: [NotVerified] });
+                        interaction.editReply({ embeds: [NotVerified] });
                         _b.label = 9;
                     case 9: return [3 /*break*/, 11];
                     case 10:

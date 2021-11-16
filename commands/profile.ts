@@ -20,11 +20,7 @@ export default {
   expectedArgsTypes: ['USER'],
 
   callback: async ({ message, args, interaction }) => {
-    let LoadingEmbed = new MessageEmbed()
-    .setTitle("Fetching profile......")
-    .setColor("YELLOW")
-    .setFooter("Cereza Core V2")
-    interaction.reply({embeds:[LoadingEmbed]})
+
     
     const target = interaction.options.getMember('user') as GuildMember || interaction.member as GuildMember
     try {
@@ -56,7 +52,7 @@ export default {
         .setDescription("You or the user you mentioned is not verified with Cereza System yet.")
         .setColor("RED")
         .setFooter("Cereza Core V2")
-        interaction.reply({embeds:[NotVerified]})
+        interaction.editReply({embeds:[NotVerified]})
       }
 
     } catch (err) {
