@@ -53,7 +53,7 @@ exports.default = {
     callback: function (_a) {
         var message = _a.message, args = _a.args, interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
-            var target, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
+            var target, loadingEmbed, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -61,6 +61,11 @@ exports.default = {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 10, , 11]);
+                        loadingEmbed = new discord_js_1.MessageEmbed()
+                            .setTitle("**Fetching Profile.......")
+                            .setColor("YELLOW")
+                            .setFooter("Cereza Core V2");
+                        interaction.reply({ embeds: [loadingEmbed] });
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 2:
                         verificationData = _b.sent();

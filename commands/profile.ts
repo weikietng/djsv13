@@ -24,7 +24,12 @@ export default {
     
     const target = interaction.options.getMember('user') as GuildMember || interaction.member as GuildMember
     try {
+      let loadingEmbed = new MessageEmbed()
+      .setTitle("**Fetching Profile.......")
+      .setColor("YELLOW")
+      .setFooter("Cereza Core V2")
 
+      interaction.reply({embeds:[loadingEmbed]})
       let verificationData = await verification.findOne({ DiscordID: `${target.id}` })
       if (verificationData) {
         let username = await noblox.getUsernameFromId(verificationData.RobloxUserID)
