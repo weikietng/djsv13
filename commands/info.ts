@@ -29,6 +29,7 @@ export default {
       .setFooter("Cereza Core V2")
 
       interaction.reply({embeds:[loadingEmbed]})
+
       let verificationData = await verification.findOne({ DiscordID: `${target.id}` })
       if (verificationData) {
         let username = await noblox.getUsernameFromId(verificationData.RobloxUserID)
@@ -49,6 +50,7 @@ export default {
         .setThumbnail(`${avatar[0].imageUrl}`)
         .setColor("#ffbb8a")
         .setFooter("Cereza Core V2")
+
         interaction.editReply({embeds:[replyEmbed]})
       } else {
         let NotVerified = new MessageEmbed()
@@ -66,7 +68,8 @@ export default {
       .setColor("RED")
       .setFooter("Cereza Error Handler")
 
-      interaction.reply({embeds:[ErrorEmbed]})
+      return interaction.channel?.send({embeds:[ErrorEmbed]})
+      
 
     }
 

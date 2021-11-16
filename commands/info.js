@@ -54,13 +54,14 @@ exports.default = {
         var interaction = _a.interaction;
         return __awaiter(void 0, void 0, void 0, function () {
             var target, loadingEmbed, verificationData, username, rank, avatar, cashdata, bandata, plrCash, banMessage, replyEmbed, NotVerified, err_1, ErrorEmbed;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         target = interaction.options.getMember('user') || interaction.member;
-                        _b.label = 1;
+                        _c.label = 1;
                     case 1:
-                        _b.trys.push([1, 10, , 11]);
+                        _c.trys.push([1, 10, , 11]);
                         loadingEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("**Fetching Profile.......**")
                             .setColor("YELLOW")
@@ -68,23 +69,23 @@ exports.default = {
                         interaction.reply({ embeds: [loadingEmbed] });
                         return [4 /*yield*/, account_1.default.findOne({ DiscordID: "" + target.id })];
                     case 2:
-                        verificationData = _b.sent();
+                        verificationData = _c.sent();
                         if (!verificationData) return [3 /*break*/, 8];
                         return [4 /*yield*/, noblox_js_1.default.getUsernameFromId(verificationData.RobloxUserID)];
                     case 3:
-                        username = _b.sent();
+                        username = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getRankNameInGroup(5206353, Number(verificationData.RobloxUserID))];
                     case 4:
-                        rank = _b.sent();
+                        rank = _c.sent();
                         return [4 /*yield*/, noblox_js_1.default.getPlayerThumbnail(Number(verificationData.RobloxUserID), "150x150")];
                     case 5:
-                        avatar = _b.sent();
+                        avatar = _c.sent();
                         return [4 /*yield*/, cash_1.default.findOne({ RobloxUserID: "" + verificationData.RobloxUserID })];
                     case 6:
-                        cashdata = _b.sent();
+                        cashdata = _c.sent();
                         return [4 /*yield*/, gamebans_1.default.findOne({ RobloxUserID: "" + verificationData.RobloxUserID })];
                     case 7:
-                        bandata = _b.sent();
+                        bandata = _c.sent();
                         plrCash = cashdata.Cash || 0;
                         banMessage = "\n \n **__Ban Information__** \n Status: Not banned";
                         if (bandata) {
@@ -106,17 +107,16 @@ exports.default = {
                             .setColor("RED")
                             .setFooter("Cereza Core V2");
                         interaction.editReply({ embeds: [NotVerified] });
-                        _b.label = 9;
+                        _c.label = 9;
                     case 9: return [3 /*break*/, 11];
                     case 10:
-                        err_1 = _b.sent();
+                        err_1 = _c.sent();
                         ErrorEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("Error Occurred")
                             .setDescription("" + err_1)
                             .setColor("RED")
                             .setFooter("Cereza Error Handler");
-                        interaction.reply({ embeds: [ErrorEmbed] });
-                        return [3 /*break*/, 11];
+                        return [2 /*return*/, (_b = interaction.channel) === null || _b === void 0 ? void 0 : _b.send({ embeds: [ErrorEmbed] })];
                     case 11: return [2 /*return*/];
                 }
             });
