@@ -48,7 +48,6 @@ exports.default = {
     description: 'Kicks a user',
     requireRoles: true,
     slash: true,
-    minArgs: 2,
     expectedArgs: '[discord user] [roblox user] [rank] [rank number]',
     expectedArgsTypes: ['USER', 'STRING', 'STRING', 'STRING'],
     callback: function (_a) {
