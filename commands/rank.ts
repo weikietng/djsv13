@@ -6,7 +6,7 @@ const GROUPID = 5206353
 
 export default {
     category: 'Moderation',
-    description: 'Kicks a user',
+    description: 'Ranks a user',
 
     requireRoles: true,
 

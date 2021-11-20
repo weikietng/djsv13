@@ -45,7 +45,7 @@ var noblox_js_1 = __importDefault(require("noblox.js"));
 var GROUPID = 5206353;
 exports.default = {
     category: 'Moderation',
-    description: 'Kicks a user',
+    description: 'Ranks a user',
     requireRoles: true,
     slash: true,
     expectedArgs: '[discord user] [roblox user] [rank] [rank number]',
